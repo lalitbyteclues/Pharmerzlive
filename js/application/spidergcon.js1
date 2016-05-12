@@ -1,0 +1,658 @@
+var apis = {};
+var selectedApis = [];
+var selectedValues = {};
+var suppliersTemplate = "<h3>##APINAME##</h3><ul>##SUPPLIERS##</ul>";
+var counter = 0;
+var deliverylocation = "";
+var supplierIndex = 0;
+var locationObjects = [];
+var locationIds = [];
+var rfqObject = [];
+
+var supplierids = {
+  "Orex Pharma Pvt Ltd" : "90E361173A3A4E36BF66EAEAD004572A",
+  "Kores India" : '90E361173A3A4E36BF66EAEAD004572A',
+  "SMS Pharmaceuticals Hyderabad" : "90E361173A3A4E36BF66EAEAD004572A",
+  "Sequent Scientific Mumbai" : "90E361173A3A4E36BF66EAEAD004572A",
+  "Phalanx Labs Pvt Ltd Hyderabad" : "90E361173A3A4E36BF66EAEAD004572A"
+};
+
+$(function() {
+  var wizard = $("#wizard").steps({
+
+    enableFinishButton: false,
+    // enableAllSteps: true,
+
+    onStepChanging: function(event, currentIndex, newIndex) {
+      //console.log(newIndex);
+      var noError = true;
+      if((currentIndex==0) && !checkForSelectedApis()) {    // Check if api is selected or not
+        //show alert
+        alert("Select atleast one api");
+        //cancel step
+        return false;
+      }
+
+      if(currentIndex == 0){}
+      
+      if (currentIndex == 1 && newIndex == 2) {
+        //generateSupplierList(); 
+        for ( property in selectedValues ) {              
+          if(selectedValues[property]["suppliers"].length === 0){              
+            alert("Please select at least one supplier for each api");
+            return false;
+          }
+          else {
+            continue;
+          }
+        } 
+        //return false;           
+      } 
+
+      if (currentIndex == 1 && newIndex == 2) {
+        makeRFQDataTemplate();
+        return true;           
+      }
+      if (currentIndex == 2) {
+        if(currentIndex == 2 && newIndex == 1){
+          return true;
+        }
+        //checkForInputs
+        $('#valuesForm input[type="text"]').each(function(index, element) {
+          if (element.value.trim() == "") {
+            // currentPageIndex--;
+            noError = false;
+            alert("All inputs must be filled.");
+            return false;
+          } 
+        });
+
+        if (noError) {
+            saveInputs();
+        }
+      }
+
+        return noError;
+    },
+
+    onStepChanged: function (event, currentIndex, priorIndex){
+      if (currentIndex == 1 && priorIndex == 0) {
+        
+        if(counter == 0) {
+          async.eachSeries(selectedApis, getSuppliers, function(err, result) {
+              $('.tick').on('click', addSupplier);
+              counter++;
+              // console.log("Done!");
+          });
+        }                   
+      }
+
+      if(currentIndex == 2) {
+        // console.log("In step 3");
+      }          
+
+      if(currentIndex == 3){
+
+
+       /* Save data to local storage*/
+        saveDataInputs();            
+      }
+    }
+  });
+  /* International number flag dropdown */
+  $("#demo").intlTelInput({
+    defaultCountry: "auto",
+    geoIpLookup: function(callback) {
+      $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+          var countryCode = (resp && resp.country) ? resp.country : "";
+          callback(countryCode);
+      });
+    },
+    //preferredCountries: [ "india" ],
+    utilsScript: "js/application/utils.js" // just for formatting/placeholders etc
+  });
+});
+
+/* Make GET request for API's List */
+getAPIs();
+
+function getAPIs() {
+  $.getJSON("js/application/newApiData2.json", function(data) {
+    // console.log(data);
+    apis = data;
+    /* Generate alphabetic list of APis dynamically and append it to html */
+    /*$.each(data, function(i, v) {
+        generateAPITemplate(data, i);
+    });*/
+
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        generateAPITemplate(data, key);
+      }
+    }
+
+    /* Add API on click to a variable */
+    //$('.apiLink').on('click', _addapi);
+    //$('body').on('click', '.apiLink', _addapi);
+
+    /* Change background color on click */
+    /*$('li a[id^="link"]').click(function() {
+        $(this).css('background-color', "#131110");
+        $(this).css('color', "#ffffff");           
+    });*/
+  });
+}
+
+function generateAPITemplate(data, i){
+  $("#API-" + data[i]["name"][0]).append("<li><a href=\"#\" class=\"apiLink\" id=\"link-" +
+            +data[i]["id"] + "\" onClick=\"_addapi('"+data[i]["name"]+"')\">" + data[i]["name"] + "</a></li>");
+}
+
+var _addapi = function(name) {
+
+    //e.preventDefault();
+    
+    /* deselect selected api */
+    var index = selectedApis.indexOf(name);
+    if (index == -1){
+      selectedApis[name] = apis[name];
+      selectedApis.push(name);
+      selectedValues[name] = {"suppliers" : []};
+    }
+
+    else
+        selectedApis.splice(index, 1);
+
+    $('#link-'+apis[name]['id']).css('background-color', "#131110");
+    $('#link-'+apis[name]['id']).css('color', "#ffffff");
+
+    /* allow only four apis to add */
+    if (selectedApis.length == 5) {
+
+        selectedApis.splice(4, 1);
+        alert("You can not select more than Four APIs.Please select the Suppliers");
+        
+        /* trigger click event after selecting four apis */
+        $('a[href="#next"]').trigger('click');
+    }
+}
+
+function checkForSelectedApis() {
+    return (selectedApis.length != 0);
+};
+
+getSuppliers = function(name, callback) {
+
+  /* GET Suppliers list for the Selected APIs */
+  var _apis = apis;
+
+  var suppliers = apis[name].suppliers;
+  /*$.each(apis, function(index, property){
+    $.each(selectedApis, function(i, name){
+      if(apis[index]["name"] == selectedApis[i]){
+        suppliers.push(apis[index]["suppliers"]);
+      }
+    });
+  });*/
+  
+
+
+  
+  var supplierTemplate = "<li><input type='checkbox' name='##NAME##' class='tick' style='margin-right: 10px;'>##NAME##</li>";
+  var newTemplate = suppliersTemplate.replace("##APINAME##", name);
+  var supplierList = "";
+  suppliers.forEach(function(supplier) {
+      supplierList += supplierTemplate.replace(/##NAME##/g, supplier["name"]);
+  });
+  newTemplate = newTemplate.replace("##SUPPLIERS##", supplierList);
+  $("#selectedApi" + (supplierIndex+1)).append(newTemplate);  
+  // $("#selectedApi" + (supplierIndex+1)).append("<span>" + selectedApis[supplierIndex] + "</span>");
+  supplierIndex++;
+  callback();
+
+  /*$.getJSON("js/application/suppliersData.json", function(suppliers) {
+    var supplierTemplate = "<li><input type='checkbox' name='##NAME##' class='tick' style='margin-right: 10px;'>##NAME##</li>";
+    var newTemplate = suppliersTemplate.replace("##APINAME##", name);
+    var supplierList = "";
+    suppliers.forEach(function(supplier) {
+        supplierList += supplierTemplate.replace(/##NAME##/g, supplier["name"]);
+    });
+    newTemplate = newTemplate.replace("##SUPPLIERS##", supplierList);
+    $("#selectedApi" + (supplierIndex+1)).append(newTemplate);  
+    $("#selectedApi" + (supplierIndex+1)).append("<span>" + selectedApis[supplierIndex] + "</span>");
+    supplierIndex++;
+    callback();
+  });*/
+}
+
+function makeRFQDataTemplate() {
+  var suppliersSelectTemplate = "<option value='##NAME##'>##NAME##</option>";
+  var apiFormTemplate =
+      "<div class='col-md-12'><label class='col-md-2'>##APINAME##</label>" +
+          "<select class='col-md-2' style='padding-bottom: 5px;'>##SUPPLIERS##</select>" +
+          "<input type='text' class='col-md-2' data-type='quantity' placeholder='Enter Quantity...' required></input>" +
+          "<input type='text' class='col-md-2' data-type='notes' placeholder='Delivery notes...' style='left: 35px;'></input>" +
+          "<input type='text' class='col-md-2' data-type='deliveryLocation' placeholder='Delivery location...' style='left: 40px;'></input></div>";
+  var allApis = Object.keys(selectedValues);
+  var formHtml = "";
+  allApis.forEach(function(api) {
+      var currentTemplate = apiFormTemplate.replace("##APINAME##", api);
+      var suppliersTemplate = "";
+      selectedValues[api]["suppliers"].forEach(function(supplier) {
+          suppliersTemplate += suppliersSelectTemplate.replace(/##NAME##/g, supplier);
+      })
+      currentTemplate = currentTemplate.replace("##SUPPLIERS##", suppliersTemplate);
+      currentTemplate = currentTemplate.replace("###VALUE###", generateDocumentNumber());
+      formHtml += currentTemplate;
+      //generateDocumentNumber();
+  });
+
+  $("#valuesForm").html(formHtml);
+}
+
+generateDocumentNumber = function() {
+  
+  var func = new Date();
+  var docNo = "rfq/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
+  counter++;
+  // console.log(docNo);
+  return docNo;
+}
+
+function checkForInputs() {
+  $('#valuesForm input[type="text"]').each(function(index, element) {
+      if (element.value.trim() == "") {
+        // currentPageIndex--;
+        noError = false;
+        alert("All inputs must be filled.");
+        return false;
+      }
+  });
+}
+
+function saveInputs() {
+  $('#valuesForm input[data-type="notes"]').each(function(index, element) {
+      selectedValues[element.parentElement.firstChild.textContent]["deliveryNotes"] = element.value;
+      //console.log("Selected values are :" + selectedValues[element.parentElement.firstChild.textContent]["deliveryNotes"]);
+  });
+  $('#valuesForm input[data-type="quantity"]').each(function(index, element) {
+      selectedValues[element.parentElement.firstChild.textContent]["quantity"] = element.value;
+  });
+  $('#valuesForm input[data-type="deliveryLocation"]').each(function(index, element) {
+      selectedValues[element.parentElement.firstChild.textContent]["deliveryLocation"] = element.value;
+      selectedValues[element.parentElement.firstChild.textContent]["documentno"] = generateDocumentNumber();
+  });
+}
+
+function submitLoginForm() {
+  var username = $('input[name="usernameLogin"]').val();  
+  var password = $('input[name="password"]').val();
+
+  /* get login token from spiderg server */
+  async.series([
+      function(callback) {
+        spiderG.getLoginToken(username, function(err, authheader){
+          $.ajax({
+            url: 'http://vpn.spiderg.com:8081/SpiderGAPIServer/api/login',
+            headers: {
+              'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+              'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, spiderG['loginToken'], spiderG['loginTokenTS'])
+            },
+            success: function(data){
+              alert("You are logged in.");    
+              callback();
+            },
+            error: function(){
+              console.log("There was an error. Please try again.");
+              callback('Error');
+            }
+          });   
+        });
+      },
+      function(callback) {
+        getProducts(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
+      },
+      function(callback) {
+        getLocationID(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
+      },
+      function(callback) {
+        generateRfq();
+        callback();
+      },
+      function(callback) {
+        submitData(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
+      },
+      function(callback) {
+        submitRfq(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
+      }
+    ], 
+    function(err, results){
+      if (err) {
+        //
+      }
+      else {
+        window.open("http://app.spiderg.com/#/login?username=" + username + "&password=" + password);
+      }
+  });
+}
+
+function getProducts(username, password, loginToken, loginTokenTS, cb){
+  console.log("Fetching Products....");
+  $.ajax({
+        url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product",
+        type: "GET",
+        // contentType: 'application/json',
+        //data: convertObject(locationObjects[index]),
+        headers: {
+          'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+          'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, loginToken, loginTokenTS)
+        },
+        success: function(data){
+          console.log("Products fetched");
+          //console.log(data);
+          compareProducts(data, username, password, loginToken, loginTokenTS, cb);
+        },
+        error: function(err) {
+          console.log(err);
+          cb(err);
+        }
+      });
+}
+
+function compareProducts(data, username, password, loginToken, loginTokenTS, cb) {
+  var dObj;
+
+  if (typeof data != 'object')
+    dObj = JSON.parse(data);
+  else
+    dObj = data;
+
+  var notexists = [];
+
+  var apiNames = Object.keys(selectedValues);
+
+  $.each(apiNames, function(index, apiName){
+    $.each(dObj, function(i, value){
+      if(apiNames[index] == dObj[i]['name']){
+        //productId.push(data[i].['id'])
+        selectedValues[apiNames[index]]['productid'] = dObj[i]['id'];
+      }
+      else if(notexists.indexOf(apiNames[index]) == -1){
+        //add product to array
+        notexists.push(apiNames[index]);
+      }
+    })
+  });
+
+  async.map(notexists, function(item, _cb) {
+    $.ajax({
+      url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product",
+      type: "POST",
+      contentType: 'application/json',
+      data: convertObject(makeProductObject(item)),
+      headers: {
+        'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+        'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, loginToken, loginTokenTS)
+      },
+      success: function(data){
+        //console.log(data);
+        selectedValues[item]['productid'] = data;
+        console.log(selectedValues[item]['productid']);
+        _cb(null);
+      },
+      error: function(err) {
+        console.log(err);
+        _cb(err);
+      }
+    });
+  }, function(err, results) {
+    cb(err, results);
+  });  
+}
+
+function makeProductObject(ProductName){
+  var productObject = {"id": "", "name": ProductName, "uom":"0", "sku": null, "upc":null, "notes": ""}
+  return productObject;
+}
+
+function getLocationID(username, password, loginToken, loginTokenTS, cb) {
+  console.log("Fetching Location...");
+  getUniqueLocationId();
+  async.map(locationObjects, function(item, callback){
+    $.ajax({
+      url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location",
+      type: "POST",
+      contentType: 'application/json',
+      data: convertObject(item),
+      headers: {
+        'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+        'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, loginToken, loginTokenTS)
+      },
+      success: function(data){
+        console.log("Location fetched");
+        var apiArray = Object.keys(selectedValues);
+        $.each(apiArray, function(index, apiName){
+          selectedValues[apiName]["locationId"] = data;
+          makeRfqDataObject(selectedValues[apiName]['documentno'] , selectedValues[apiName]['locationId'], selectedValues[apiName]['deliveryNotes'], selectedValues[apiName]['id'])
+        });
+        callback(null);
+      },
+      error: function(err) {
+        console.log(err);
+        callback(err);
+      }
+    });
+  }, cb); 
+}
+
+function makeLocationDataObject(deliverylocation) {
+  var id = "";
+  var addressline1 = deliverylocation;
+  var addressline2 = "";
+  var postalcode = "";
+  var city = "0";
+  var region = null;
+  var country = "IN";
+
+  var locationObject = {"addressline1": addressline1, "addressline2": addressline2, "postalcode": postalcode,
+                        "city": city, "region": region, "country": country};
+  return locationObject;
+}
+
+function getUniqueLocationId() {
+  var apiArray = Object.keys(selectedValues);
+  $.each(apiArray, function(index, apiName){
+    locationObjects.push(makeLocationDataObject(selectedValues[apiName]['deliveryLocation']));
+    // console.log(locationObjects);
+  });
+  return locationObjects;
+}
+
+
+function submitData(username, password, loginToken, loginTokenTS, cb) {
+  async.map(rfqObject, function(item, _cb){
+    $.ajax({
+      url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/rfq",
+      data: convertObject(item),
+      type: "POST",
+      contentType: 'application/json',  
+      headers: {
+        'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+        'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, loginToken, loginTokenTS)
+      },
+      success: function(data, textStatus, xhr){
+        if(xhr.status == 200){
+          //console.log("Data Posted Successfully.");
+          item.id = data;
+          _cb();
+        } else{
+          alert("There was a problem. Please try again...");
+          _cb('');
+        }
+      }
+    });
+  }, cb);
+};
+
+function submitRfq(username, password, loginToken, loginTokenTS, callback){
+  async.map(rfqObject, function(item, cb){
+    $.ajax({
+      url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbox",
+      data: JSON.stringify({
+        receiverorg: item.bpartner,
+        dtype: 'rfq',
+        documentid: item.id
+      }),
+      type: "POST",
+      contentType: 'application/json',  
+      headers: {
+        'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
+        'SPIDERG-Authorization' : "SPIDERGAUTH "+ spiderG.createAuthenticationHeader(username, password, loginToken, loginTokenTS)
+      },
+      success: function(data, textStatus, xhr){
+        if(xhr.status == 200){
+          console.log("Data Posted Successfully.");
+          cb();
+        } else{
+          alert("There was a problem. Please try again...");
+          cb('');
+        }
+      }
+    });
+  }, callback);
+};
+
+function getLocationObject() {
+  makeLocationDataObject();  
+};
+
+function saveDataInputs() {
+  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+
+  // Retrieve the object from storage
+  var retrievedObject = localStorage.getItem('selectedValues');
+  //console.log(retrievedObject);
+
+  //console.log('retrievedObject: ', JSON.parse(retrievedObject));
+}
+
+function addSupplier(event) {
+    //console.log("boo!");
+    var _supplier = event.target.name;
+    var _api = event.target.parentElement.parentElement.parentElement.firstChild.textContent;
+
+    var index = selectedValues[_api]["suppliers"].indexOf(_supplier);
+    if (index == -1)
+        selectedValues[_api]["suppliers"].push(_supplier);
+    else
+        selectedValues[_api]["suppliers"].splice(index, 1);
+}
+
+function generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(10);
+    });
+    return uuid;
+};
+
+function makeRfqDataObject(documentno, deliverylocation, notes, productID) {
+
+  var id = generateUUID();
+  var documentno = documentno;
+  var issuedate = (new Date).getTime();
+  var validity = "";
+  var currency = "INR";
+  var deliveryterms = "";
+  var bpartner = "null for now";
+  var deliverylocation = deliverylocation;
+  var status = "";
+  var notes = notes;
+  var lineitems = {};
+  lineitems["id"] = "";
+  lineitems["lineno"] = "";
+  lineitems["product"] = productID;
+  lineitems["quantity"] = "";
+  lineitems["uom"] = "kg";
+  lineitems["notes"] = notes;
+
+  var rfq = {"id": id, "documentno": documentno, "issuedate": issuedate, "validity": validity, "currency": currency, 
+               "deliveryterms": deliveryterms, "receiveremail": bpartner, "deliverylocation": deliverylocation, 
+               "status": status, "notes": notes, "lineitems": lineitems
+  }; 
+
+  //rfqObject.push(rfq);
+  // console.log(rfqObject);
+  // return rfqObject;   
+};
+
+
+
+function generateRfq() {
+  var apiArray = Object.keys(selectedValues);
+  var suprfq = {};
+
+  $.each(apiArray, function(index, apiName){
+    $.each(selectedValues[apiName]["suppliers"], function(i, s) {
+      if (suprfq[s]) {
+        suprfq[s]['products'][selectedValues[apiName]["productid"]] = selectedValues[apiName]["quantity"];
+      }
+      else {
+        suprfq[s] = {};
+        suprfq[s]['products'] = {};
+        suprfq[s]['products'][selectedValues[apiName]["productid"]] = selectedValues[apiName]["quantity"];
+        suprfq[s]['documentno'] = selectedValues[apiName]["documentno"];
+        suprfq[s]['deliveryLocation'] = selectedValues[apiName]["locationId"];
+        suprfq[s]['deliveryNotes'] = selectedValues[apiName]["deliveryLocation"];
+      }
+    });
+  });
+
+  $.each(Object.keys(suprfq), function(index, sup) {
+    var rfqObj = suprfq[sup];
+    var rfq = {"id": "", "documentno": rfqObj["documentno"], "issuedate": (new Date).getTime(), "currency": "INR", 
+               "deliveryterms": "", "bpartner": supplierids[sup], "deliverylocation": rfqObj["deliveryLocation"], 
+               "notes": rfqObj["deliveryNotes"], "lineitems" : [] };
+     var lno = 1;
+
+    $.each(Object.keys(rfqObj.products), function(i, p) {
+      rfq.lineitems.push({
+        'id' : '',
+        'lineno' : (lno),
+        'product' : p,
+        'quantity' : rfqObj.products[p],
+        'uom' : '0',
+        'notes': ''
+      });
+      lno++;
+    });
+
+    rfqObject.push(rfq);
+    //makeRfqDataObject(rfqObj["documentno"], rfqObj["deliveryLocation"] , selectedValues[apiName]["deliveryNotes"], selectedValues[apiName]["productid"]);
+  });
+  console.log("RFQ list: %j", rfqObject);
+}
+
+function convertObject(data) {
+  // console.log(JSON.stringify(data));
+  return JSON.stringify(data);
+}
+
+
+// function convertJSON() {
+//   var toret = {};
+//   $.getJSON("js/application/apiData.json", function(data) {
+    
+//     //console.log(toret);
+//     $.getJSON("js/application/newApiData.json", toret);
+//   });
+
+//     /*var file = new File("newApiData.js");
+//     file.open("w");
+//     file.writeln(JSON.stringify(toret));
+//     file.close();*/
+// }
+
+// convertJSON();

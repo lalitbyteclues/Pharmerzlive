@@ -1,0 +1,928 @@
+[
+    {
+        "id": "",
+        "name": "SALBUTAMOL SULPHATE IP / bP/EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "ALBUTROL SULPHATE USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "LEVOSALBUTAMOL SULPHATE IP/USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "BROMHEXINE HCL IP / BP/ EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "MOXIFLOXACIN HCL BP/ EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "TELMISARTAN IP / EP / USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "MEFENAMIC ACID BP / IP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "OXYCLOZANIDE BP V",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "FLUCONAZOLE BP / USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "TRAMADOL BP / EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "CYPROHEPTADINE HCL BP / USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "DOMPERDONE BP / EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "DOMPERIDONE MELEATE BP / EP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "SILDENAFIL CITRATE",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "CALCIUM GLYCEROPHOSPHATE ",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "MAGNESIUM GLYCEROPHOSPHATE ",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "SODIUM GLYCEROPHOSPHATE",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Orex Pharma Ltd"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Ranitidine Hcl {Form-2} USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Pantoprazole Sodium Sesquihydrate USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Itraconazole USP / Ph.Eur / JP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Lanoconazole USP / JP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sumatriptan Succinate USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sumatriptan Base USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Almotriptan Malate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Zolmitriptan USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Rizatriptan Benzoate USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Eletriptan Hydrobromide Monohydrate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Imidapril Hcl",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sildenafil Citrate USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Ondansetron Hcl USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Gabapentin USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Aripiprazole USP / Ph.Eur",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Rosiglitazone Maleate USP",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Tenofovir Disoproxil Fumarate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Linagliptin",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Vildagliptin",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Ambroxol Hydrochloride",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Acebrophylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Doxofylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Theophylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Etofylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Aminophylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Acefylline Piperazine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Acefylline",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Gliclazide",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Glimepiride",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Ivabradine HCl",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Dorzolamide HCl",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Montelukast Sodium",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Pamabrom",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Orphenadrine Citrate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Orphenadrine HCl",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Caffeine / Caffeine Granules",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Kores India"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Aciclovir Sodium",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Albendazole",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Artemether",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Artesunate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Amyl Meta Cresol",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Citicoline Sodium",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Colchicine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Dihydroartemisinin",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Ertapenem",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Etomidate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Hydralazine Hcl",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Indomethacin Sodium",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "DL-Selenomethionine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Lumefantrine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Methoxsalen",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Midazolam",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Mivacurium Chloride",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Oseltamivir Phosphate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Piperaquine Phosphate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Praziquantel",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Rifaximin",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Succinyl Choline Chloride",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Warfarin",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Sequent Scientific Mumbai"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sildenafil Citrate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sumatriptan Succinate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Tadalafil",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            },
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Famotidine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            },
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Olmesartan Medoxomil",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Levetiracetam",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            },
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Telmisartan",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            },
+            {
+                "id": "",
+                "name": "SMS Pharmaceuticals Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Rizatriptan Benzoate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "L-Carbocisteine",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Dabigatran",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Dapoxetine Hydrochloride",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Almotriptan Malate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Eletriptan HBr Monohydrate",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Misoprostol Development",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    },
+    {
+        "id": "",
+        "name": "Sofosbuvir",
+        "suppliers": [
+            {
+                "id": "",
+                "name": "Phalanx Labs Pvt Ltd Hyderabad"
+            }
+        ]
+    }
+]
