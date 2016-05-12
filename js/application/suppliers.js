@@ -19,7 +19,7 @@ function getRegistrationData(){
   var userFirstName = $('input[name="userFirstName"]').val();
   var userLastName = $('input[name="userLastName"]').val();
   var userEmail = $('input[name="userEmail"]').val();
-  var userPhone = $('input[name="userPhone"]').val();
+  var userPhone ="+"+$('input[name="userPhone"]').intlTelInput("getSelectedCountryData").dialCode+ $('input[name="userPhone"]').val(); 
   var reg_token = "";
   var cryptPassword = CryptoJS.MD5(password);
   var registrationData = {};
@@ -101,15 +101,15 @@ function makeAnotherTokenRequest(){
 
 function submitRegistrationToken(email, password, token, cb) {
  // alert(email+password+token);
-  spiderG.getLoginToken(email, function (err, authheader) {
-  var auth= createAuthenticationHeader(email, password, spiderG['loginToken'], spiderG['loginTokenTS']);
+ // spiderG.getLoginToken(email, function (err, authheader) {
+ // var auth= createAuthenticationHeader(email, password, spiderG['loginToken'], spiderG['loginTokenTS']);
    
   $.ajax({
     url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/register/verify?token=" + token + "&email=" + email,
     type: "POST",dataType: 'text',
     headers: {
       'SPIDERG-API-Key' : 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
-      'SPIDERG-Authorization' : "SPIDERGAUTH " + email
+ 'SPIDERG-Authorization' : "SPIDERGAUTH " + "register"
     },
     success: function(data){
       //redirect to /login
@@ -132,7 +132,7 @@ function submitRegistrationToken(email, password, token, cb) {
       cb(err);
     }
   });
-  });
+ // });
 };
 
 function submitLoginData() {

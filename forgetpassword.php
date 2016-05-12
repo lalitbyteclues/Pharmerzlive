@@ -168,7 +168,7 @@ function changepassword()
 <script type="text/javascript" src="/js/application/loginForm.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script> 
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="http://pharmerz.com/admin/js/md5.js"></script>
 <script type="text/javascript" src="/js/application/modernizr.js"></script> 
 <script type="text/javascript" src="/js/common.js"></script> 
 <script type="text/javascript" src="/js/owl.carousel.min.js"></script>

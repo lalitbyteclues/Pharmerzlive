@@ -159,7 +159,7 @@ if(!isset($_SESSION['user_email']))
 
     <script src="js/custom.js"></script>
     <script type="text/javascript" src="../js/application/custom.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+    <script src="http://pharmerz.com/admin/js/md5.js"></script>
 
     <!-- flot js -->
     <!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->

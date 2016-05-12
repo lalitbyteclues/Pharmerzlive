@@ -122,7 +122,7 @@
             
         </div>
     </div>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="http://pharmerz.com/admin/js/md5.js"></script>
 <script type="text/javascript" src="js/ankcustom.js"></script>
 <script type="text/javascript" src="js/admincustm.js"></script>
 <!-- <script type="text/javascript" src="js/suppliers.js"></script> -->

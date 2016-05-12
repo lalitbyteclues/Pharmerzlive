@@ -189,7 +189,7 @@ if($_SESSION['user_id'] == ''){
  <script type="text/javascript" src="../js/application/custom.js"></script>
  <script type="text/javascript" src="../js/application/ankcustm.js"></script>
  <script type="text/javascript" src="../js/parsley.js"></script>
- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+ <script src="http://pharmerz.com/admin/js/md5.js"></script>
  <script type="text/javascript"> 
  var username = "<?php echo $_SESSION['user_email']; ?>";
      var password = "<?php echo $_COOKIE['password']; ?>";

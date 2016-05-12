@@ -268,7 +268,7 @@ if(isset($_GET['username']))
       <script type="text/javascript" src="/js/application/search_proank.js"></script>
       <script type="text/javascript" src="/js/application/custom.js"></script>
         <script type="text/javascript" src="/js/application/ankcustm.js"></script>
-        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+        <script src="http://pharmerz.com/admin/js/md5.js"></script>
        <script type="text/javascript">
           $(document).ready(function(){
             $('#nomo').click(function(){
