@@ -119,7 +119,7 @@
             });
         }, 100000);
         $.ajax({
-            type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbox?dtype=rfq&limit=10", contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (data) {
+            type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbox?dtype=rfq&limit=9999999", contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (data) {
                 people = data;
                 if (people.length > 0) { 
                     saveDataInputs();

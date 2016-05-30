@@ -154,7 +154,7 @@ if($_SESSION['user_id'] == ''){ header('Location: ../index.php'); } ?>
 								<form id="uploadForm" action="../test.php" enctype="multipart/form-data" method="post">
 								<div class="x_title"> <div class="col-md-6 col-sm-6 col-xs-12">
                                     <h2>Upload Multiple Products</h2></div> <div class="col-md-6 col-sm-6 col-xs-12">
-					 <a title="download sample Excel Format" href="http://pharmerz.com/uploads/product.xlsx" target="_blank">Download Sample Excel Format &nbsp; <i class="fa fa-cloud-download fa-5"></i></a> </div>
+					 <a title="download sample Excel Format" href="http://pharmerz.com/product.xlsx" target="_blank">Download Sample Excel Format &nbsp; <i class="fa fa-cloud-download fa-5"></i></a> </div>
                                     <div class="clearfix"></div>
                                 </div>
 							  <div class="form-group"> <input name="userImage" id="userImage" required type="file" class="demoInputBox" /></div>
