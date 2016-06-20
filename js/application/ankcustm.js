@@ -207,7 +207,7 @@ $(document).ready(function () {
 function sendquotation(username, password) {
 	$(".se-pre-con").fadeIn("slow");
     var func = new Date();
-    var docNo = "QT/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter+"");
+    var docNo = "QT/" + func.getYear() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter+"");
     counter++;	
     var totallines =1;
     var grandtotal = $("#excludetaxes").val();

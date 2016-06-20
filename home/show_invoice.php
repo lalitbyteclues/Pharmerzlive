@@ -124,6 +124,14 @@
         <script src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script> 
         <script>
           $(document).ready(function() {
+			  function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
 			      var loginToken = "";
 				  var senderorglist=[];
 				    var uomlist=[];
@@ -178,11 +186,11 @@ loginToken = spiderG['loginToken'];
 							categoryname=$.grep(categorylistparsed,function (category){return category.id == productresponse.category_id })[0].name; 
 						 
  uom=$.grep(uomlist,function (uomsingle){return uomsingle.id == peoplesingle.lineitems[0].uom })[0].name; 		 
-							notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,uom,peoplesingle.lineitems[0].quantity,peoplesingle.lineitems[0].price,peoplesingle.grandtotal,productresponse.name,categoryname,peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+							notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,uom,peoplesingle.lineitems[0].quantity,peoplesingle.lineitems[0].price,peoplesingle.grandtotal,productresponse.name,categoryname,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
 							  callback();}});
 						}  
 						else{							
-							notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,"","","",peoplesingle.grandtotal,"","",peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+							notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,"","","",peoplesingle.grandtotal,"","",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
 							callback();
 						}            
 					 }});
@@ -195,12 +203,12 @@ loginToken = spiderG['loginToken'];
 										categoryname=$.grep(categorylistparsed,function (category){return category.id == productresponse.category_id })[0].name; 
 									 
 									uom=$.grep(uomlist,function (uomsingle){return uomsingle.id == peoplesingle.lineitems[0].uom })[0].name; 									
-									notesTable.row.add([tttt+1,peoplesingle.documentno,$.grep(senderorglist,function (category){return category.id == peoplesingle.bpartner })[0].name,uom,peoplesingle.lineitems[0].quantity,peoplesingle.lineitems[0].price,peoplesingle.grandtotal,productresponse.name,categoryname,peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+									notesTable.row.add([tttt+1,peoplesingle.documentno,$.grep(senderorglist,function (category){return category.id == peoplesingle.bpartner })[0].name,uom,peoplesingle.lineitems[0].quantity,peoplesingle.lineitems[0].price,peoplesingle.grandtotal,productresponse.name,categoryname,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
 									callback(); 
 								}});
 							}
 							else{
-								notesTable.row.add([tttt+1,peoplesingle.documentno,$.grep(senderorglist,function (category){return category.id == peoplesingle.bpartner })[0].name,"","","",peoplesingle.grandtotal,"","",peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+								notesTable.row.add([tttt+1,peoplesingle.documentno,$.grep(senderorglist,function (category){return category.id == peoplesingle.bpartner })[0].name,"","","",peoplesingle.grandtotal,"","",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),moment(peoplesingle.paymentduedate*1000).format("DD-MM-YYYY"),"<a href='view_invoice.php?id="+peoplesingle.id+"'>View</a>"]).draw();
 								callback();
 							}
 					 } 

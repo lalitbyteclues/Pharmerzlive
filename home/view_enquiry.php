@@ -239,7 +239,7 @@ spiderG.getLoginToken(username, function()
                         people = data; 
                         $("#doc_no").html(people.documentno);
 						channel=people.channel;
-                        var currdate = new Date(people.issuedate);
+                        var currdate = new Date(people.issuedate*1000);
 console.log(currdate);
                         var finl_date = currdate.getDate() + '/' + (currdate.getMonth() + 1) + '/' + currdate.getFullYear();
                         $("#issuedate").html(finl_date);

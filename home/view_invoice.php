@@ -339,7 +339,7 @@ spiderG.getLoginToken(username, function()
                         //var finl_date =  currdate.toString("MMM dd")
                         $("#issuedate").html(finl_date);
 
-                     	$("#notes").html(people.notes);
+                     	$("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).notes);
                         $("#currency").html(people.currency); 
                         if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
                         
@@ -369,7 +369,14 @@ spiderG.getLoginToken(username, function()
                     }
                 });
             });
-
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
             function getorgname(org)
             {
                 var username = "<?php echo $_SESSION['user_email']; ?>";

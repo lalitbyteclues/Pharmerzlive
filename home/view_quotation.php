@@ -283,6 +283,14 @@ spiderG.getLoginToken(username, function()
 
         <script>
 		var channel="";
+		function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
           $(document).ready(function(){
             var org_id = "<?php echo $_GET['id']; ?>";
             var username = "<?php echo $_SESSION['user_email']; ?>";
@@ -301,7 +309,7 @@ spiderG.getLoginToken(username, function()
    var currdate1 = new Date(people.datepromised*1000 );
    var finl_date1 = currdate1.getDate() + '/' + (currdate1.getMonth() + 1) + '/' + currdate1.getFullYear();
    $("#datepromised").html(finl_date1);
-	$("#notes").html(people.notes);
+	$("#notes").html(people.notes=="" || IsJsonString(people.notes)?"":JSON.parse(people.notes).notes);
     $("#currency").html(people.currency); 
     if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
 	if(people.lineitems[0]){ $("#rate").html(people.lineitems[0].price); }
