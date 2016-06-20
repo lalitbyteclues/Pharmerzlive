@@ -721,6 +721,7 @@ function customcall(myordid, callback) {
     var func = new Date();
     var docNo = "EN/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
     counter++;
+    var d =parseInt(new Date().getTime() / 1000);
     var product = { "documentno": docNo, "issuedate": d, "currency": "INR", "deliverylocation": dloc, "bpartner": myordid, "notes": dnoes, };
     var str = JSON.stringify(product);
     spiderG.getLoginToken(username, function (err, authheader) {
@@ -804,6 +805,7 @@ function generateUUID() {
 function makeRfqDataObject(documentno, deliverylocation, notes, productID) {
     var id = generateUUID();
     var documentno = documentno;
+    var issuedate =parseInt( (new Date).getTime()/1000);
     var validity = "";
     var currency = "INR";
     var deliveryterms = "";
