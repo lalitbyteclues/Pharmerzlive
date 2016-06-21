@@ -86,7 +86,7 @@ include('include/dbconnection.php');
                                             <div class="col-md-5 col-sm-9 col-xs-12">
                                                 <input type="text" class="form-control" id="remail" readonly placeholder="Reciver Email">
                                             </div>
-											 <label class="control-label col-md-2 col-sm-3 col-xs-3">PO Date:</label>
+											 <label style="padding-top:0;" class="control-label col-md-2 col-sm-3 col-xs-3">PO Date:</label>
                                             <div class="col-md-2 col-sm-9 col-xs-9" id="issuedate"> 
                                             </div>
                                         </div> 
@@ -103,12 +103,12 @@ include('include/dbconnection.php');
                                             </div>
                                         </div>
                                          <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Product</label>
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-2">Product</label>
                                             <div class="col-md-3 col-sm-9 col-xs-9" id="p_name"  >
                                             
                                             </div>
-											 <label class="control-label col-md-3 col-sm-3 col-xs-3">Category</label>
-                                            <div class="col-md-3 col-sm-9 col-xs-9"    id="category"> 
+											 <label class="control-label col-md-2 col-sm-2 col-xs-2">Category</label>
+                                            <div class="col-md-5 col-sm-9 col-xs-9"    id="category"> 
                                             </div>
                                         </div>
                                         <div class="form-group">

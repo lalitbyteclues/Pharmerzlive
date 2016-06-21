@@ -215,7 +215,7 @@ function sendquotation(username, password) {
     var baprtid = $("#baprtid").val();
     var senderorgid = $("#senderorgid").val(); 
     var dloctaion = $("#dloctaion").val();
-    var notes = $("#notes").val();
+    var notes =JSON.stringify({"notes": $("#notes").val(),"paymentterms":$("#paymentterms").val(),"leadtime":$("#leadtime").val(),"freight":$('input:radio[name=freight]:checked').val()});
     var receiveremail = $("#remail").val();
     var datepromised = $("#offerdate").val();
     var datepromissed = new Date(datepromised); // some mock date
@@ -265,12 +265,12 @@ $.ajax({type:"POST",url:"http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbo
 function sendpo(username, password) {
 	$(".se-pre-con").fadeIn("slow");
     var func = new Date();
-    var docNo = "PO/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
+    var docNo = "PO/" + func.getYear() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
     counter++;
     var date_ordered = $("#hidden_date").val();
     var baprtid = $("#baprtid").val();
     var dloctaion = $("#dloctaion").val();
-    var notes = $("#notes").val();
+    var notes =JSON.stringify({"notes": $("#notes").val(),"paymentterms":$("#paymentterms").val(),"leadtime":$("#leadtime").val(),"freight":$('input:radio[name=freight]:checked').val()});
     var deliveryterms = $("#deliveryterms").val();
     var currency = $("#currency").html();
     var grandtotal = $("#grandtotal").val();
@@ -334,7 +334,7 @@ $(".se-pre-con").fadeIn("slow");
     var invoiceduedate =new Date($("#invoiceduedate").val()).getTime()/1000; 
     var baprtid = $("#baprtid").val();
     var dloctaion = $("#dloctaion").val();
-    var notes = $("#notes").val();
+	var notes =JSON.stringify({"notes": $("#notes").val(),"paymentterms":$("#paymentterm").val(),"leadtime":"","freight":""});
     var currency = $("#currency").html();
     var grandtotal = $("#grandtotal").val();
     var totallines = $("#totallines").val();

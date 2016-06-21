@@ -151,7 +151,24 @@
                                                 <span id="uom"></span>
                                             </div>
                                         </div>
-                                       
+                                       <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Payment Terms</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="paymentterms"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Lead Time</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="leadtime"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Freight</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="freight"></span>
+                                            </div>
+                                        </div><br>
                                          <div class="form-group col-md-12">
                                             <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Notes</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -330,7 +347,10 @@ var channel="";
                         $("#invoiceamt").html(people.grandtotal);  
                         if(people.lineitems[0])
 						{
-							$("#notes").html(people.lineitems[0].notes); 
+						$("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?people.notes:JSON.parse(people.notes).notes); 
+    $("#paymentterms").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).paymentterms); 
+    $("#leadtime").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).leadtime); 
+    $("#freight").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).freight);
 							$("#price").html(people.lineitems[0].price);
 							$("#quantity").html(people.lineitems[0].quantity); 
 							$("#netamount").html(people.grandtotal-people.lineitems[0].taxamt); 
@@ -352,6 +372,14 @@ var channel="";
                     }
                 });
             });
+			function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
             function getorgname(org)
             {
                 var username = "<?php echo $_SESSION['user_email']; ?>";

@@ -153,6 +153,24 @@
                                                 <span id="uom"></span>
                                             </div>
                                         </div>
+										  <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Payment Terms</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="paymentterms"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Lead Time</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="leadtime"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Freight</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="freight"></span>
+                                            </div>
+                                        </div><br>
                                          <div class="form-group col-md-12">
                                             <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Notes</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -309,7 +327,10 @@ spiderG.getLoginToken(username, function()
    var currdate1 = new Date(people.datepromised*1000 );
    var finl_date1 = currdate1.getDate() + '/' + (currdate1.getMonth() + 1) + '/' + currdate1.getFullYear();
    $("#datepromised").html(finl_date1);
-	$("#notes").html(people.notes=="" || IsJsonString(people.notes)?"":JSON.parse(people.notes).notes);
+	    $("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?people.notes:JSON.parse(people.notes).notes); 
+    $("#paymentterms").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).paymentterms); 
+    $("#leadtime").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).leadtime); 
+    $("#freight").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).freight); 
     $("#currency").html(people.currency); 
     if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
 	if(people.lineitems[0]){ $("#rate").html(people.lineitems[0].price); }

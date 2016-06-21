@@ -81,31 +81,17 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery location</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">Address line 1</strong> : <span id="deliveryloc1"></span>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">Address line 2</strong> : <span id="deliveryloc2"></span>
-                                            </div>
-                                            <div class="col-md-offset-3 col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">Postal Code</strong> : <span id="deliveryloc3"></span>
-                                            </div>
-                                             <div class="col-md-offset-3 col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">City</strong> : <span id="deliveryloc4"></span>
-                                            </div>
-                                            <div class="col-md-offset-3 col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">Region</strong> : <span id="deliveryloc5"></span>
-                                            </div>
-                                            <div class="col-md-offset-3 col-md-9 col-sm-9 col-xs-12">
-                                                 <strong id="">Country</strong> : <span id="deliveryloc6"></span>
-                                            </div>
-                                        </div><br><br>
+                                            <span id="deliveryloc1"></span>, <span id="deliveryloc2"></span> <br>
+											 <span id="deliveryloc4"></span>, <span id="deliveryloc5"></span>,  <span id="deliveryloc6"></span>  <span id="deliveryloc3"></span>
+                                            </div> 
+                                        </div><br> 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Product</label>
+                                            <label class="control-label col-md-2 col-sm-3 col-xs-12">Product</label>
                                             <div class="col-md-3 col-sm-9 col-xs-12">
                                                 <span id="product"></span>
                                             </div>
-											  <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                                            <div class="col-md-3 col-sm-9 col-xs-12">
+											  <label class="control-label col-md-2 col-sm-2 col-xs-12">Category</label>
+                                            <div class="col-md-5 col-sm-9 col-xs-12">
                                                 <span id="category"></span>
                                             </div>
                                         </div><br><br>
@@ -150,8 +136,26 @@
                                                 <span id="uom"></span>
                                             </div>
                                         </div>
+										<div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Payment Terms</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="paymentterms"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Lead Time</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="leadtime"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Freight</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="freight"></span>
+                                            </div>
+                                        </div><br>
                                          <div class="form-group col-md-12">
-                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Notes</label>
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Message</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <span id="notes"></span>
                                             </div>
@@ -282,7 +286,10 @@ spiderG.getLoginToken(username, function()
                          var currdate = new Date(people.issuedate * 1000);
                         var finl_date = currdate.getDate() + '/' + (currdate.getMonth() + 1) + '/' + currdate.getFullYear();
                         $("#issuedate").html(finl_date);
-                     	$("#notes").html(people.notes);
+                     	$("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?people.notes:JSON.parse(people.notes).notes); 
+    $("#paymentterms").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).paymentterms); 
+    $("#leadtime").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).leadtime); 
+    $("#freight").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).freight);
                         $("#currency").html(people.currency); 
                         if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
 						  if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
@@ -309,7 +316,14 @@ spiderG.getLoginToken(username, function()
                     }
                 });
             });
-
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
             function getorgname(org)
             {
                 var username = "<?php echo $_SESSION['user_email']; ?>";

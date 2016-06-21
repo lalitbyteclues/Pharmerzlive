@@ -135,6 +135,14 @@ if(tttt< people.length) {
 		}
 	});
  }
+ function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
  function customcall(peoplesingle,callback) {   
  $.ajax({type:"GET",url:"http://vpn.spiderg.com:8081/SpiderGAPIServer/api/org?extensionid=7D6AACFA15614E1CBE3626B7513191F0&orgid="+peoplesingle.bpartner,contentType:'application/json',headers:{'SPIDERG-API-Key':'e5e3b300-31e9-4ad2-a705-4f8935218fcb','SPIDERG-Authorization': "SPIDERGAUTH "+ createAuthenticationHeader(username,password,loginToken,loginTokenTS)},success:function(data){
   people1 = data; 
@@ -146,14 +154,14 @@ if(tttt< people.length) {
 	 if(peoplesingle.deliverylocation){	 
 	   $.ajax({type:"GET",url:"http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location/"+peoplesingle.deliverylocation,contentType:'application/json',headers:{'SPIDERG-API-Key':'e5e3b300-31e9-4ad2-a705-4f8935218fcb','SPIDERG-Authorization': "SPIDERGAUTH "+ createAuthenticationHeader(username,password,loginToken,loginTokenTS)},success: function (deliverylocationparsed){
 	     var location=deliverylocationparsed.city+" ,"+deliverylocationparsed.region;
-	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,productresponse.name,categoryname,peoplesingle.lineitems[0].price,peoplesingle.lineitems[0].quantity,peoplesingle.grandtotal,location,peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,productresponse.name,categoryname,peoplesingle.lineitems[0].price,peoplesingle.lineitems[0].quantity,peoplesingle.grandtotal,location,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
   callback(); 
 }});}else{
-	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,productresponse.name,categoryname,peoplesingle.lineitems[0].price,peoplesingle.lineitems[0].quantity,peoplesingle.grandtotal,"",peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,productresponse.name,categoryname,peoplesingle.lineitems[0].price,peoplesingle.lineitems[0].quantity,peoplesingle.grandtotal,"",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
 callback(); }
 	   }}); 
   }else{
-	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,"","","","",peoplesingle.grandtotal,"",peoplesingle.notes,moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
+	  notesTable.row.add([tttt+1,peoplesingle.documentno,people1.name,"","","","",peoplesingle.grandtotal,"",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes),moment(peoplesingle.issuedate*1000).format("DD-MM-YYYY"),"<a href='view_po.php?id="+peoplesingle.id+"'>View</a>"]).draw();
   callback(); 
   }
  }});  

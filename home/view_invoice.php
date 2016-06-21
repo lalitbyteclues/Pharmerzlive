@@ -180,8 +180,26 @@
                                                 <span id="price"></span>
                                             </div>
                                         </div>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Payment Terms</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="paymentterms"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Lead Time</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="leadtime"></span>
+                                            </div>
+                                        </div><br>
+										 <div class="form-group col-md-12">
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Freight</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <span id="freight"></span>
+                                            </div>
+                                        </div><br>
                                          <div class="form-group col-md-12">
-                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Notes</label>
+                                            <label style="margin-left: -1%;" class="control-label col-md-3 col-sm-3 col-xs-12">Message</label>
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <span id="notes"></span>
                                             </div>
@@ -338,8 +356,10 @@ spiderG.getLoginToken(username, function()
                         var finl_date = currdate.getDate() + '/' + (currdate.getMonth() + 1) + '/' + currdate.getFullYear();
                         //var finl_date =  currdate.toString("MMM dd")
                         $("#issuedate").html(finl_date);
-
-                     	$("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).notes);
+$("#notes").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?people.notes:JSON.parse(people.notes).notes); 
+    $("#paymentterms").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).paymentterms); 
+    $("#leadtime").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).leadtime); 
+    $("#freight").html(people.notes=="" || people.notes==null || IsJsonString(people.notes)?"":JSON.parse(people.notes).freight); 
                         $("#currency").html(people.currency); 
                         if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
                         

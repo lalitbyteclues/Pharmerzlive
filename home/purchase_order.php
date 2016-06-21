@@ -137,38 +137,36 @@ include('include/dbconnection.php');
     </div> -->
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-3">Delivery Location</label>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>Address Line 1</strong></span><br>
- <span id="deliveryloc1"></span>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>Address Line 2</strong></span><br>
- <span id="deliveryloc2"></span>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>postalcode</strong></span><br>
- <span id="deliveryloc3"></span>
-        </div>
-    </div>
-      <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-3">Delivery Location</label>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>City</strong></span><br>
- <span id="deliveryloc4"></span>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>Region</strong></span><br>
- <span id="deliveryloc5"></span>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
- <span><strong>City</strong></span><br>
- <span id="deliveryloc6"></span>
-        </div>
-    </div>
+        <div class="col-md-9 col-sm-9 col-xs-9"> 
+ <span id="deliveryloc1"></span>,  <span id="deliveryloc2"></span><br>
+ <span id="deliveryloc4"></span>, <span id="deliveryloc5"></span> , <span id="deliveryloc6"></span>   <span id="deliveryloc3"></span>
+        </div>  
+    </div> 
+	 <div class="form-group">
+		 <label class="control-label col-md-3 col-sm-3 col-xs-3">Payment Terms</label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+				<input type="text" class="form-control" id="paymentterms" placeholder="  Payment Terms" >
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3">Lead Time</label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+				<input type="text" class="form-control" id="leadtime" placeholder="  Lead Time" >
+			</div>
+		</div> 
+		 <div class="form-group">
+			<label class="control-label col-md-3 col-sm-3 col-xs-3">Freight Type</label>
+			<div class="col-md-9 col-sm-9 col-xs-9">
+			<div class="radio">
+				<label><input type="radio" name="freight" id="paid" checked="true"  value="Paid" />Paid</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="freight" id="topay" value="To Pay" />To Pay</label>
+			</div> 
+			</div>
+	</div> 
     <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-3">Notes</label>
+        <label class="control-label col-md-3 col-sm-3 col-xs-3">Message</label>
         <div class="col-md-9 col-sm-9 col-xs-9">
-   <input type="text" class="form-control" id="notes" placeholder="Notes" >
+   <input type="text" class="form-control" id="notes" placeholder="Message" >
         </div>
     </div> 
      <div class="form-group">

@@ -308,7 +308,7 @@ spiderG.getLoginToken(username, function()
                   $("#issuedate").html(finl_date);
                   $("#currency").html(people.currency); 
                   if(people.lineitems[0]){ $("#quantity").html(people.lineitems[0].quantity); }
-                  if(people.lineitems[0]){  $("#notes").html(people.lineitems[0].notes); }
+                  $("#notes").html(people.notes); 
                  
                   getdeliveryloc(people.deliverylocation);
                   if(people.lineitems[0]){ getproname(people.lineitems[0].product) }

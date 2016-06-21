@@ -154,18 +154,18 @@ $(document).ready(function () {
                                                 type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location/" + peoplesingle.deliverylocation, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (deliverylocationparsed) {
                                                     locationlist.push(deliverylocationparsed);
                                                     var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                                     callback();
                                                 }
                                             });
                                         } else {
                                             deliverylocationparsed = $.grep(locationlist, function (category) { return category.id == peoplesingle.deliverylocation })[0];
                                             var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                             callback();
                                         }
                                     } else {
-                                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                         callback();
                                     }
                                 }
@@ -182,23 +182,23 @@ $(document).ready(function () {
                                         type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location/" + peoplesingle.deliverylocation, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (deliverylocationparsed) {
                                             locationlist.push(deliverylocationparsed);
                                             var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                             callback();
                                         }
                                     });
                                 } else {
                                     deliverylocationparsed = $.grep(locationlist, function (category) { return category.id == peoplesingle.deliverylocation })[0];
                                     var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                     callback();
                                 }
                             } else {
-                                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                 callback();
                             }
                         }
                     } else {
-                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), "", "", "", "", "",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), "", "", "", "", "",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                         callback();
                     }
                 }
@@ -221,18 +221,18 @@ $(document).ready(function () {
                                         type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location/" + peoplesingle.deliverylocation, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (deliverylocationparsed) {
                                             locationlist.push(deliverylocationparsed);
                                             var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                             callback();
                                         }
                                     });
                                 } else {
                                     deliverylocationparsed = $.grep(locationlist, function (category) { return category.id == peoplesingle.deliverylocation })[0];
                                     var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                     callback();
                                 }
                             } else {
-                                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                 callback();
                             }
                         }
@@ -249,23 +249,23 @@ $(document).ready(function () {
                                 type: "GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/location/" + peoplesingle.deliverylocation, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (deliverylocationparsed) {
                                     locationlist.push(deliverylocationparsed);
                                     var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                                    notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                                     callback();
                                 }
                             });
                         } else {
                             deliverylocationparsed = $.grep(locationlist, function (category) { return category.id == peoplesingle.deliverylocation })[0];
                             var location = deliverylocationparsed.city + " ," + deliverylocationparsed.region;
-                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                            notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, location, peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                             callback();
                         }
                     } else {
-                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                        notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), productresponse.name, categoryname, "", peoplesingle.lineitems[0].quantity, peoplesingle.lineitems[0].price,( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                         callback();
                     }
                 }
             } else {
-                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), "", "", "", "", "",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?"":JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
+                notesTable.row.add([tttt + 1, peoplesingle.documentno, people1.name, moment(datetforshow).format("DD-MM-YYYY"), "", "", "", "", "",( peoplesingle.notes=="" || peoplesingle.notes==null || IsJsonString(peoplesingle.notes)?peoplesingle.notes:JSON.parse(peoplesingle.notes).notes), peoplesingle.grandtotal, "<a href='view_quotation.php?id=" + peoplesingle.id + "'>View</a>"]).draw();
                 callback();
             }
         }

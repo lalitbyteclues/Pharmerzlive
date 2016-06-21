@@ -121,7 +121,7 @@ include('include/dbconnection.php'); ?>
                                                 <input type="text" class="form-control" id="includetaxes" readonly placeholder="Product price(Include Taxes)" >
                                             </div>
                                         </div>
-									   <!--  <div class="form-group">
+									    <div class="form-group">
                                          <label class="control-label col-md-3 col-sm-3 col-xs-3">Payment Terms</label>
                                             <div class="col-md-9 col-sm-9 col-xs-9">
                                                 <input type="text" class="form-control" id="paymentterms" placeholder="  Payment Terms" >
@@ -136,9 +136,12 @@ include('include/dbconnection.php'); ?>
                                          <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-3">Freight Type</label>
                                             <div class="col-md-9 col-sm-9 col-xs-9">
-											<div class="radio"> <label><input type="radio" name="freight" id="paid"   value="Paid" />Paid</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="freight" id="topay" value="To Pay" />To Pay</label></div> 
+											<div class="radio">
+												<label><input type="radio" name="freight" id="paid" checked="true"  value="Paid" />Paid</label>
+												&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="freight" id="topay" value="To Pay" />To Pay</label>
+											</div> 
                                             </div>
-                                        </div> -->
+                                        </div>  
                                          <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-3">Offer valid date</label>
                                             <div class="col-md-9 col-sm-9 col-xs-9">
@@ -322,11 +325,11 @@ include('include/dbconnection.php'); ?>
                         var dloctaion = $("#dloctaion").val(people1.deliverylocation);
                        var currdate = new Date(people1.issuedate*1000);
                         var finl_date = currdate.getDate() + '/' + (currdate.getMonth() + 1) + '/' + currdate.getFullYear();
-                        $("#dateordered").html(finl_date); 
-                        $("#remail").val(people1.receiveremail);
+                        $("#dateordered").html(finl_date);  
                         $("#rfqid").val(people1.id);  
 						 $.ajax({type:"GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbox/" + people1.mailid, contentType: 'application/json', headers: {'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization':"SPIDERGAUTH " + createAuthenticationHeader(username,password,loginToken,loginTokenTS)},success: function (mailbox) {
 						   $("#senderorgid").val(mailbox.senderorg);
+						    $("#remail").val(mailbox.senderemail);
 						  var baprtid = $("#baprtid").val(mailbox.receiverorg);
 						
 						  $.ajax({type:"GET", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/org?extensionid=7D6AACFA15614E1CBE3626B7513191F0&orgid=" + mailbox.senderorg, contentType: 'application/json', headers: {'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization':"SPIDERGAUTH " + createAuthenticationHeader(username,password,loginToken,loginTokenTS)},success: function (supplier) {
