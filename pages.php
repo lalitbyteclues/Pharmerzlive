@@ -48,12 +48,13 @@ if(isset($_GET['username']))
             </div>
              
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 gg1">
-                  <div class="coco">
-                     <div class="input-group wer">
-                       <input type="text" class="form-control" placeholder="Search Product" aria-describedby="basic-addon2" id="search"> 
-                       <span class="input-group-addon" onclick="searchproduct();" id="basic-addon2">&nbsp;&nbsp;&nbsp;<i class="fa fa-search">&nbsp;&nbsp;</i></span>
-                     </div>
-                  </div>      
+                   <div class="coco">
+	 <form class="input-group wer"  method="get" id="searchproduct" action="/products.php"> 
+         <input type="text" required class="form-control"  onkeypress="return IsAlphaNumeric(event);"  name="namelike" id="search" placeholder="Search Product" aria-describedby="basic-addon2">
+         <span class="input-group-addon" onclick="document.getElementById('searchproduct').submit();" id="basic-addon2">&nbsp;&nbsp;&nbsp;<i class="fa fa-search">&nbsp;&nbsp;</i></span>
+       <input type="submit" style="display:none;" id="submitbtn"  />
+	   </form>
+    </div>     
             </div>
                                
            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">

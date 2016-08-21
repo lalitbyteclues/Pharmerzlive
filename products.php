@@ -14,6 +14,7 @@
   <div id="wizard">
     <h1>Select Products</h1>
 <div>
+<span id="error1" style="color: Red; display: none">* No Records Found</span>
 <img src="/tinymce/skins/lightgray/img/loader.gif" id="productloader">
 <div id="slider"> 
 	<div class="slider-content">
@@ -217,6 +218,7 @@
 <script type="text/javascript" src="/js/application/jquery.validate.js"></script>
 <script type="text/javascript" src="/js/application/popup.js"></script>
 <script type="text/javascript" src="/js/slidernav.js"></script>
+ <script type="text/javascript" src="/js/application/suppliers.js"></script>
  <script type="text/javascript">
 $(document).ready(function(){
  $('#nomo').click(function(){

@@ -8,8 +8,8 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
  }
 ?><?php include('head.php'); ?>
  
-<body class="cms-index-index" ng-app="pharmerzApp" ng-conroller="suppliersListCtrl">
-  <div class="page"> 
+<body class="cms-index-index" ng-app="pharmerzApp">
+  <div class="page"  ng-conroller="suppliersListCtrl"> 
   <!-- Header -->
      <?php include('inner_menu.php'); ?>  
       <div id = "registration">
@@ -35,10 +35,10 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
                         <div class="col-lg-12">
                           <form id="login-form" method="get" role="form" style="display: block;">
                             <div class="form-group">
-                              <input type="text" name="loginUsername" id="loginUsername" tabindex="1" class="form-control" placeholder="Username" value="">
+                              <input type="text" name="loginUsername" id="loginUsername" tabindex="1" class="form-control" placeholder="Username *" value="">
                             </div>
                             <div class="form-group">
-                              <input type="password" name="loginPassword" id="loginPassword" tabindex="2" class="form-control" placeholder="Password">
+                              <input type="password" name="loginPassword" id="loginPassword" tabindex="2" class="form-control" placeholder="Password *">
                             </div>
                             <div class="form-group text-center">
                               <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -64,26 +64,39 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
                         <!-- End Login -->
                         <!-- Register -->
                         <form id="register-form" method="get" role="form" style="display: none;">
+						<div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+							<div id="danger" style="display:none;" class="alert alert-danger">
+								<span class="alert-danger"></span>
+							</div> 
+<span id="error" style="color: Red; display: none">* Special Characters not allowed</span>							
+<span id="error1" style="color: Red; display: none">* Special Characters and numbers not allowed</span>							
+                         </div>
+                         </div>	
                           <div class="form-group">
-                            <input type="text" name="userCompany" id="userCompany" tabindex="1" class="form-control" placeholder="Company Name" value="">
+                            <input type="text" name="userCompany"  onkeypress="return IsAlphaNumeric(event);" ondrop="return false;"
+        onpaste="return false;" id="userCompany" tabindex="1" class="form-control" placeholder="Company Name *" value="">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="userFirstName" id="userFirstName" tabindex="1" class="form-control" placeholder="First Name" value="">
+                            <input type="text" onkeypress="return IsAlphaNumericwithnumeric(event);" ondrop="return false;"
+        onpaste="return false;"  name="userFirstName" id="userFirstName" tabindex="1" class="form-control" placeholder="First Name *" value="">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="userLastName" id="userLastName" tabindex="1" class="form-control" placeholder="Last Name" value="">
+                            <input type="text"  onkeypress="return IsAlphaNumericwithnumeric(event);" ondrop="return false;"
+        onpaste="return false;"  name="userLastName" id="userLastName" tabindex="1" class="form-control" placeholder="Last Name *" value="">
                           </div>
                           <div class="form-group">
-                            <input type="text" name="userEmail" id="userEmail" tabindex="1" class="form-control" placeholder="Email" value="">
+                            <input type="text" name="userEmail" id="userEmail" tabindex="1" class="form-control" placeholder="Email *" value="">
                           </div>
                           <div class="form-group">
-                            <input type="password" name="password" id="password" tabindex="1" class="form-control" placeholder="Password">
+                            <input type="password"  onkeypress="return Ischeckspacefromstring(event);" ondrop="return false;"
+        onpaste="return false;"   name="password" id="password" tabindex="1" class="form-control" placeholder="Password *">
                           </div>
                           <!-- <div class="form-group">
                             <input type="password" name="confirmPassword" id="confirmPassword" tabindex="2" class="form-control" placeholder="Confirm Password">
                           </div> -->
                           <div class="form-group">
-                            <input type="tel" name="userPhone" id="demo" tabindex="1" class="form-control" placeholder="Phone Number" value=""  style="height:43px;">
+                            <input type="tel" name="userPhone" id="demo" tabindex="1" class="form-control" placeholder="Phone Number *" value=""  style="height:43px;">
                             <!-- <input type="tel" id="demo" placeholder=""> -->
                           </div>
                           <!-- <div class="form-group text-center">
@@ -93,18 +106,12 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
                           <div class="form-group" style="margin-top: 0px;">
                             <div class="row">
                               <div class="col-sm-6 col-sm-offset-3">
-                                <input type="button" name="callMe" id="callMe" tabindex="4" class="form-control btn btn-login" value="Signup" onClick="getRegistrationData()">
+                                <input type="button" name="callMe" id="callMe" tabindex="4" class="btn btn-primary" value="Signup" onClick="getRegistrationData()">
+                                <input type="reset"  tabindex="5" class="btn btn-warning" value="Reset" >
                               </div>
                             </div>
                           </div>
-                        </form>    
-<div class="form-group">
-                            <div class="col-sm-8 col-sm-offset-3">
-							<div id="danger" style="display:none;" class="alert alert-danger">
-								<span class="alert-danger"></span>
-							</div>                           
-                         </div>
-                         </div>						
+                        </form> 					
                       </div>
                     </div>
                   </div>

@@ -639,8 +639,7 @@ p + cite {
   font-weight: 700;
   text-transform: uppercase;
   color: #fff;
-  padding: 12px 27px 9px;
-  background-color: #f42434;
+  padding: 12px 27px 9px; margin-top:0;
 }
 .btn:hover {
   background: #0098db;

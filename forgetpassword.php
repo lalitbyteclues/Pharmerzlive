@@ -28,7 +28,14 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
 						 
                       </div>
                           <form id="login-form" method="get" role="form" style="display: block;">
-						 
+						 <div class="form-group"> 
+                            <div class="col-sm-6 col-sm-offset-3">
+							<div id="danger" style="display:none;" class="alert alert-danger">
+								<span class="alert-danger"></span>
+							</div>
+                           
+                         </div>
+                         </div>
                             <div class="form-group">
                               <input type="text" name="loginUsername" id="loginUsername" tabindex="1" class="form-control" placeholder="your Email" value="">
                             </div> 
@@ -39,23 +46,26 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
 								  tabindex="4" class="form-control btn btn-login" value="Submit" onClick="changepassword()">
                                 </div>
                               </div>
-                            </div><div class="form-group"> 
+                            </div>
+                             
+                          </form>  <form id="resetpass" method="get" role="form" style="display: none;">
+						  <BR>
+						  <BR>
+						<div class="form-group"> 
                             <div class="col-sm-6 col-sm-offset-3">
 							<div id="danger" style="display:none;" class="alert alert-danger">
 								<span class="alert-danger"></span>
 							</div>
                            
                          </div>
-                         </div>
-                             
-                          </form>  <form id="resetpass" method="get" role="form" style="display: none;">
-						  <BR>
-						  <BR> 
+                         </div>						  
                             <div class="form-group">
-                              <input type="text" name="loginUsername" id="resetcode" tabindex="1" class="form-control" placeholder="Enter Reset Code" value="">
+                              <input type="text" name="loginUsername"  onkeypress="return Ischeckspacefromstring(event);" ondrop="return false;"
+        onpaste="return false;"  id="resetcode" tabindex="1" class="form-control" placeholder="Enter Reset Code" value="">
                             </div> 
 							<div class="form-group">
-                              <input type="password" name="loginUsername" id="password" tabindex="1" class="form-control" placeholder="Enter New Password" value="">
+                              <input type="password"  onkeypress="return Ischeckspacefromstring(event);" ondrop="return false;"
+        onpaste="return false;"  name="loginUsername" id="password" tabindex="1" class="form-control" placeholder="Enter New Password" value="">
                             </div>
                             <div class="form-group">
                               <div class="row">
@@ -64,14 +74,7 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
 								  tabindex="4" class="form-control btn btn-login" value="Reset Password" onClick="resetpassword()">
                                 </div>
                               </div>
-                            </div><div class="form-group"> 
-                            <div class="col-sm-6 col-sm-offset-3">
-							<div id="danger" style="display:none;" class="alert alert-danger">
-								<span class="alert-danger"></span>
-							</div>
-                           
-                         </div>
-                         </div>
+                            </div>
                              
                           </form>        
                       </div>
@@ -88,7 +91,14 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
 </div>
 <script>
 function changepassword()
-	{  var username=$("#loginUsername").val();
+	{ 
+ $("#danger").css("display", "none");
+	var username=$("#loginUsername").val();
+	  if( !isValidEmailAddress( username ) ) {
+	   $(".alert-danger").html("Invalid Email Address "); 
+       $("#danger").css("display", "block");
+	   return;
+  }
 		$.ajax({ type: "GET",url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/user/resetpassword?username="+username,
             headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
                          'SPIDERG-Authorization': "SPIDERGAUTH "+ username
@@ -102,18 +112,28 @@ function changepassword()
 				
 			},
             error: function (err) {
-              console.log(err);
-               
+				var er=JSON.parse( err.responseText);  
+				  $(".alert-danger").html(" "+er.message+" "); 
+                        $("#danger").css("display", "block"); 
               }
         });
 	}
 	function resetpassword()
 	{  
-	
-	var username=$("#loginUsername").val();
-	console.log(username);
+	$("#danger").css("display", "none");
+	var username=$("#loginUsername").val(); 
 	var password=$("#password").val();
 	var resetcode=$("#resetcode").val();
+	 if(password=="") {
+	   $(".alert-danger").html("Enter Password "); 
+       $("#danger").css("display", "block");
+	   return;
+  }
+  if(resetcode=="") {
+	   $(".alert-danger").html("Enter Reset Code "); 
+       $("#danger").css("display", "block");
+	   return;
+  } 
 	var user ={"resetcode":resetcode,"username":username,"newpassword":password}
 	   var objectDataString = JSON.stringify(user);
 		$.ajax({ type: "POST",url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/user/resetpassword?resetcode="+resetcode+"&username="+username+"&newpassword="+password,

@@ -75,5 +75,5 @@ window.onload = function(e)
  <?php if($_SESSION['user_id']==""){ ?>  <script>  
   localStorage.setItem('username',"");
   localStorage.setItem('password',"");
- </script>  <?php  }  ?>
+ </script>  <?php  }  ?> 
    </head>
