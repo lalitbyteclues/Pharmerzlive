@@ -7,26 +7,11 @@
       <!-- Favicons Icon -->
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <!-- CSS Style -->
-      <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-      <link rel="stylesheet" href="/css/style.css" type="text/css">
-      <link rel="stylesheet" href="/css/revslider.css" type="text/css"> 
-      <link rel="stylesheet" href="/css/mainstyle.css" type="text/css">
-      <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
-      <link rel="stylesheet" href="/css/owl.theme.css" type="text/css">  
-      <link rel="stylesheet" href="/css/custom.css" type="text/css">
-	 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet'>
-	 <link href='/fonts/css/font-awesome.css' rel='stylesheet'> 
-     <link rel="stylesheet" href="/css/animate.css" type="text/css">
-    <link rel="stylesheet" href="/css/jquery.steps.css" type="text/css">
-      <link href='http://fonts.googleapis.com/css?family=Raleway:500,600' rel='stylesheet' type='text/css'>
-      <!-- Google Fonts -->
-      <!--slide link-->
-	  
-      <link rel="stylesheet" type="text/css" href="/css/stylo.css" >
-      <script src="/js/modernizr.custom.63321.js"></script>
-      <!--slide link-->
-      <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/flexslider.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/helper.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts.css">    
        <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
 window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=

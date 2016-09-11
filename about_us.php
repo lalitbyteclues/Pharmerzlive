@@ -5,6 +5,7 @@
       <div class="page">
           <!--===header start===-->
              <?php include('inner_menu.php'); ?>
+			 <section class="container-fluid hero"></section>
       <!-- end offer banner section -->
       <!-- main container -->
       <!-- Why should I join Pharmerze Section -->
@@ -279,7 +280,6 @@
       <!-- JavaScript -->
       <script type="text/javascript" src="/js/jquery.min.js"></script>
       <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-      <!-- <script type="text/javascript" src="/js/application/spidergcon.js"></script> -->
       <script type="text/javascript" src="/js/common.js"></script>
       <script type="text/javascript" src="/js/revslider.js"></script>
       <script type="text/javascript" src="/js/owl.carousel.min.js"></script>

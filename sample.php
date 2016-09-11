@@ -351,8 +351,7 @@
 <script type="text/javascript" src="/js/application/intlTelInput.min.js"></script>
 <script type="text/javascript" src="/js/application/sweetalert.min.js"></script>
 <script type="text/javascript" src="/js/application/buyers.js"></script>
-<script type="text/javascript" src="/js/application/custom.js"></script>
-<script type="text/javascript" src="/js/application/spidergcon.js"></script>
+<script type="text/javascript" src="/js/application/custom.js"></script> 
 <script type="text/javascript" src="/js/application/loginForm.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script> 
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>

@@ -68,8 +68,7 @@ $(document).ready(function () {
    $.ajax({type:"GET",url:"http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product/category",contentType:'application/json',headers:{'SPIDERG-API-Key':'e5e3b300-31e9-4ad2-a705-4f8935218fcb','SPIDERG-Authorization': "SPIDERGAUTH " + "register"}, success: function (data) {
 			categorylistparsed = data;
                 for (var j = 0; j < categorylistparsed.length; j++) {
-                    $('#mycate').append("<li><a href=\"/products.php?categoryid=" + categorylistparsed[j].id + "\" class=\"apiLink\" id=\"link-"
-               + categorylistparsed[j].id + "\" onClick=\"_addapi('" + categorylistparsed[j].name + "','" + categorylistparsed[j].id + "','" + categorylistparsed[j].spg_org_id + "')\">" + categorylistparsed[j].name + "</a></li>");
+                    $('#mycate').append("<li><a href=\"/products.php?categoryid=" + categorylistparsed[j].id + "\">" + categorylistparsed[j].name + "</a></li>");
                 };
             }, error: function (err) {   }
         }); 

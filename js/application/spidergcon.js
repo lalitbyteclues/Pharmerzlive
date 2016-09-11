@@ -14,6 +14,221 @@ var yyy = 1;
 var zzz = 1;
 var ppp = 1;
 var ooo = 1;
+
+var app = angular.module('pharmerz', ['infinite-scroll']);
+app.constant('RESOURCES', (function () {
+    return {API_BASE_PATH: 'http://vpn.spiderg.com:8081/SpiderGAPIServer/api/',APIKey:'e5e3b300-31e9-4ad2-a705-4f8935218fcb' }
+	})())
+app.controller("productscontroller", function ($scope, $http, RESOURCES,$q) {
+$scope.locationid="";
+$scope.uomid="";
+$scope.character='a'; $scope.isbusy=true; $scope.sortby="name";$scope.products=[];$scope.supplierslist=[];
+$scope.categorylistparsed=[];	$scope.pageno=1;	$scope.limit=12;
+	$scope.tabstatus=1; 
+	
+	$scope.changesortorder=function(order){
+		$scope.sortby=order;
+	}
+	$scope.searchdata=function(){
+    $scope.locations=[];
+	$scope.uom=[];
+	$scope.isbusy=true;  
+	var param=location.search.substring(1).split("="); 
+	var pro_url =""; 	
+	$scope.product={};   
+	if(param.length>0){ 
+		if(param[0]=='categoryid'){
+			pro_url =RESOURCES.API_BASE_PATH + "product?category_id=" +param[1]+ "&namelike=" + $scope.character + "&offset="+(($scope.pageno-1)*$scope.limit)+"&public=Y&limit="+$scope.limit+"&unique=Y";
+		 }
+		else
+		if(param[0]=='namelike')
+		{ 
+	$scope.character=param[1].substring(0,1);
+	pro_url = RESOURCES.API_BASE_PATH + "product?namelike=" + param[1] + '&public=Y&offset='+(($scope.pageno-1)*$scope.limit)+'&limit='+$scope.limit+'&unique=Y';
+		}else{
+		  pro_url = RESOURCES.API_BASE_PATH + "product?namelike=" + $scope.character + '&offset='+(($scope.pageno-1)*$scope.limit)+'&public=Y&limit='+$scope.limit+'&unique=Y';
+		}
+	}
+	else{
+		  pro_url = RESOURCES.API_BASE_PATH + "product?namelike=" + $scope.character + '&offset='+(($scope.pageno-1)*$scope.limit)+'&public=Y&limit='+$scope.limit+'&unique=Y';
+		}   
+    $("#slider").css('visibility', 'hidden');
+    document.getElementById("error1").style.display = 'none';
+    $(".se-pre-con").fadeIn("slow");
+	$(".se-pre-con").fadeIn("slow");
+console.log(pro_url);	
+$http.get(pro_url, {headers: {'SPIDERG-API-Key':RESOURCES.APIKey,'SPIDERG-Authorization': "SPIDERGAUTH " + "register" }
+}).then(processFile); 
+	}
+	 function processFile(response) {  
+	 if(response.data.length==0){
+		 $scope.isbusy=false; 
+		  document.getElementById("error1").style.display = 'block';
+	 }
+	 return $q.all(response.data.map(function (file) {
+                return getNumber(file);
+            })); 
+	 }
+	  function getNumber(file) {
+		  $http.get(RESOURCES.API_BASE_PATH + "product?namelike=" + file.name + '&public=Y&limit=500', {headers: {'SPIDERG-API-Key':RESOURCES.APIKey,'SPIDERG-Authorization': "SPIDERGAUTH " + "register" }
+}).then(processFilesuppl);  
+	  }
+	   function processFilesuppl(response) { 
+	     return $q.all(response.data.map(function (file) {
+                return getNumbersupply(file);
+            }));
+	   }
+function getNumbersupply(file) {
+			$http.get(RESOURCES.API_BASE_PATH+"org?orgid="+file.spg_org_id, {headers: {'SPIDERG-API-Key':RESOURCES.APIKey,'SPIDERG-Authorization': "SPIDERGAUTH " + "register" }
+			}).then(function(supp){  
+			if($scope.character.toLowerCase()==file.name.substring(0,1).toLowerCase()){
+				$scope.products.push({name:file.name,imgurl:file.imgurl,id:file.id,suppliername:supp.data.name,supplierid:supp.data.id,category_name:$.grep($scope.categorylistparsed, function(b){return b.id == file.category_id;})[0].name}); 
+				$scope.isbusy=false;
+				}else{ 
+					$scope.isbusy=true;
+				}
+				 
+			});
+	}
+	$scope.searchtext=function(txt){ 
+		$scope.pageno=1;
+		$scope.character=txt;
+		$scope.products=[];
+		$scope.searchdata(); 
+	}
+	$scope.changepageno=function(){
+if($scope.isbusy==false && $scope.tabstatus==1){
+		$scope.pageno=$scope.pageno+1; 
+		$scope.searchdata(); }		
+	}
+	 $.ajax({type:"GET",url:RESOURCES.API_BASE_PATH + "product/category",contentType:'application/json',headers:{'SPIDERG-API-Key':RESOURCES.APIKey,'SPIDERG-Authorization': "SPIDERGAUTH " + "register"}, success: function (data) {
+			$scope.categorylistparsed = data; 		
+            } 
+        }); 
+	$scope.searchdata();
+$scope.sendproductenquiry=function(data){
+	var username = localStorage.getItem('username');
+	var password = localStorage.getItem('password');
+	$scope.product= data; 
+	if (username == "" || username == null) {
+		$("#login-modal").modal();
+		return false;
+	}
+	$scope.isbusy=true; 
+	 spiderG.getLoginToken(username, function () {
+        var loginToken = spiderG['loginToken'];
+        var loginTokenTS = spiderG['loginTokenTS'];
+	$.ajax({ type: "GET", url:RESOURCES.API_BASE_PATH+"location", contentType: 'application/json', headers: { 'SPIDERG-API-Key':RESOURCES.APIKey, 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) },
+	success: function (people) { 
+		$scope.locations=people;
+		 $.ajax({type:"GET",url: RESOURCES.API_BASE_PATH+"uom",contentType:'application/json',headers:{ 'SPIDERG-API-Key':RESOURCES.APIKey, 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) },
+		 success: function (peopleuom) {
+				$scope.uom=peopleuom; 
+				$scope.isbusy=false; 
+				$scope.$apply();
+		 }});
+	 }});});
+	$scope.tabstatus=2; 
+}
+$scope.submitLoginForm =function() {
+    $(".se-pre-con").fadeIn("slow");
+	$scope.isbusy=true; 
+    var username = $('input[name="usernameLogin"]').val();
+    var password = $('input[name="password"]').val(); 
+    async.series([
+        function (callback) { 
+            $.ajax({url: loginAddress, headers: { 'SPIDERG-API-Key':RESOURCES.APIKey, 'SPIDERG-Authorization': "SPIDERGAUTH " + spiderG.createAuthenticationHeader(username, null, "", "")                }, success: function (response) {
+                    spiderG.getLoginToken(username, function (err, authheader) {$.ajax({url:RESOURCES.API_BASE_PATH + 'login',                            headers: {                                'SPIDERG-API-Key':RESOURCES.APIKey,                                'SPIDERG-Authorization': "SPIDERGAUTH " + spiderG.createAuthenticationHeader(username, password, spiderG['loginToken'], spiderG['loginTokenTS']) },
+                            success: function (data) {
+                                $("#login-modal").hide();
+                                localStorage.setItem('username', username);
+                                localStorage.setItem('password', password);
+                                document.cookie = 'username=' + username;
+                                document.cookie = 'password=' + password;
+								  $(".modal-backdrop").fadeOut("slow");
+                                callback();
+								 jQuery("#div_session_write").load("/session_write.php?username=" + username); 
+								$scope.sendproductenquiry($scope.product);
+                            },
+                            error: function () { 
+                                $(".se-pre-con").fadeOut("slow");
+                              
+                                $(".alert-danger").html("Check Your User Name and Password.");
+                                $("#danger").css("display", "block");
+                                callback('Error');
+                            }
+                        });
+                    });
+                }, error: function () { 
+                    $(".se-pre-con").fadeOut("slow");
+                    $("#danger").css("display", "block");
+                    $(".alert-danger").html("Check Your User Name and Password.");
+                    callback('Error');
+                }
+            });
+        } 
+    ],
+      function (err, results) {
+          if (err) {  }
+          else {
+              $("#loginanchortag").hide();
+              $(".modal-open").css("overflow", "scroll");
+              jQuery("#div_session_write").load("/session_write.php?username=" + username); 
+          }
+      });
+}
+$scope.selectproducts=function(){
+	$scope.tabstatus=1;
+}
+$scope.sendenquiry=function(){ 
+    var username = localStorage.getItem('username');
+    var password = localStorage.getItem('password');    
+    var uom = localStorage.getItem('uomtext_1');
+    var func = new Date();
+    var docNo = "EN/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
+    counter++;
+    var d =parseInt(new Date().getTime() / 1000);
+    var product = { "documentno": docNo, "issuedate": d, "currency": "INR", "deliverylocation": $scope.locationid, "bpartner": $scope.product.supplierid, "notes": $scope.message, };
+    var str = JSON.stringify(product);
+    spiderG.getLoginToken(username, function (err, authheader) {
+        var loginToken = spiderG['loginToken'];
+        var loginTokenTS = spiderG['loginTokenTS'];
+        $.ajax({type:"POST",url:RESOURCES.API_BASE_PATH + "rfq",data:str,contentType:'application/json',dataType: 'text',headers:{'SPIDERG-API-Key':RESOURCES.APIKey,'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS)},success: function (data){
+				rfqid = data; 
+                    var rfqitem = { "rfqid": rfqid, "lineno": "1", "product": $scope.product.id, "quantity": $scope.quantity, "uom": $scope.uomid, "notes":  $scope.message };
+                    var strrfqitem = JSON.stringify(rfqitem);
+                    $.ajax({type: "POST", url: RESOURCES.API_BASE_PATH + "rfqlineitem", data: strrfqitem, contentType: 'application/json',dataType: 'text'                    , headers: { 'SPIDERG-API-Key':RESOURCES.APIKey, 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }                    , success: function (data) { 
+                            var mail_rfq = { "receiverorg": $scope.product.supplierid, "dtype": "rfq", "documentid": rfqid };
+                            var str = JSON.stringify(mail_rfq);
+                            $.ajax({type: "POST", url: RESOURCES.API_BASE_PATH + "mailbox", data: str, contentType: 'application/json' ,dataType: 'text'                          , headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) },success: function (mailresponse) { 
+									 $(".se-pre-con").fadeOut("slow");
+									 alert("Your Enquiry has submitted successfully.");
+									$scope.isbusy=false; 
+									window.location.href = "/index.php?username=" + username;
+                                },
+                                error: function (err) {
+                                    $(".se-pre-con").fadeOut("slow");
+                                    alert("Error in Enquiry."); 
+                                }
+                            }); 
+						},error: function (err) {
+                            $(".se-pre-con").fadeOut("slow");
+                            alert("Error in Enquiry.");
+                        }
+                    }); 
+                status = 1;
+            },error: function (err) { 
+				console.log(err);
+                $(".se-pre-con").fadeOut("slow");
+                alert("Error in Enquiry."); 
+            }
+        });
+    }); 
+}
+	
+});
+
+
 $(function () {
     makeCustomUOM();
     sessnamea = localStorage.getItem('sess_name');
@@ -132,63 +347,7 @@ $(function () {
 
 /* Make GET request for API's List */
 function getAPIs(searchitem, categoryid, username, password) {
-	$("#slider").css('visibility', 'hidden');
-	document.getElementById("error1").style.display='none';
-    $(".se-pre-con").fadeIn("slow");
-    if (categoryid != "") {
-        var pro_url = "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product?category_id=" + categoryid + "&public=Y&limit=100000&unique=Y";
-    } else
-        if (searchitem == '') {
-            var pro_url = "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product?public=Y&limit=100000&unique=Y&unique=Y";
-        }
-        else {
-            var pro_url = "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product?namelike=" + searchitem + '&public=Y&limit=100000&unique=Y';
-        }
-    if (username == "" || true) {
-        $.ajax({type: "GET", url: pro_url, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + "register" }, success: function (data) {
-                people = data; 
-				if(people.length==0){
-				document.getElementById("error1").style.display =people.length==0? "inline" : "none"; 
-				 $(".se-pre-con").fadeOut("slow");
-				 $("#slider").css('visibility', 'visible');					
-						$("#productloader").fadeOut();	
-				}
-                for (var j = 0; j < people.length; j++) {
-                    if (people[j].name != "") {
-					    var first_letter = (people[j].name.replace('4','').replace('4','').replace('1 ','').replace('1-','').replace('2 ','').replace('2-','').replace('3 ','').replace('3-','').replace('5 ','').replace('5-','').replace('6 ','').replace('6-','').replace('7 ','').replace('7-','').replace('8 ','').replace('8-','').replace('9 ','').replace('9-','').replace('(','').replace('[','').replace('-','').replace(' ','').replace('[',''))[0];
-                        var capital_letter = first_letter.toUpperCase(); 
-						try { 
-							$("#API-" + capital_letter).append("<li><a href=\"javascript:void(0);\" class=\"apiLink\" id=\"link-" + people[j].id + "\" onClick=\"_addapi('" + people[j].name.replace('\n','') + "','" + people[j].id + "','" + people[j].spg_org_id + "')\">" + people[j].name.replace('\n','') + "</a></li>");
-						}
-					catch(err) { }
-						$("#slider").css('visibility', 'visible');					
-						$("#productloader").fadeOut();					
-                    } }
-                $(".se-pre-con").fadeOut("slow");
-
-            },
-
-        });
-
-    } else {
-        spiderG.getLoginToken(username, function () {
-            var loginToken = spiderG['loginToken'];
-            var loginTokenTS = spiderG['loginTokenTS'];
-            $.ajax({
-                type: "GET", url: pro_url, contentType: 'application/json', headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }, success: function (people) {
-                    for (var j = 0; j < people.length; j++) {
-                        if (people[j].name != "") {
-                            var first_letter = people[j].name[0];
-                            var capital_letter = first_letter.toUpperCase();
-                            $("#API-" + capital_letter).append("<li><a href=\"javascript:void(0);\" class=\"apiLink\" id=\"link-"
-                        + people[j].id + "\" onClick=\"_addapi('" + people[j].name + "','" + people[j].id + "','" + people[j].spg_org_id + "')\">" + people[j].name + "</a></li>");
-                        }
-                    }
-                    $(".se-pre-con").fadeOut("slow");
-                },
-            });
-        });
-    }
+	
 }
 
 var _addapi = function (name, id, org_id) {
@@ -459,88 +618,7 @@ function saveInputs() {
     var cart_total = localStorage.getItem('cart_total');
     var rfq_id = localStorage.getItem('rfq_id');
     xxx++;
-}
-function submitLoginForm() {
-    $(".se-pre-con").fadeIn("slow");
-    var username = $('input[name="usernameLogin"]').val();
-    var password = $('input[name="password"]').val();
-    /* get login token from spiderg server */
-    async.series([
-        function (callback) {
-
-            $.ajax({
-                url: loginAddress, headers: {
-                    'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + spiderG.createAuthenticationHeader(username, null, "", "")
-                }, success: function (response) {
-                    spiderG.getLoginToken(username, function (err, authheader) {
-                        $.ajax({
-                            url: 'http://vpn.spiderg.com:8081/SpiderGAPIServer/api/login',
-                            headers: {
-                                'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',
-                                'SPIDERG-Authorization': "SPIDERGAUTH " + spiderG.createAuthenticationHeader(username, password, spiderG['loginToken'], spiderG['loginTokenTS'])
-                            },
-                            success: function (data) {
-                                $("#login-modal").hide(1000);
-                                localStorage.setItem('username', username);
-                                localStorage.setItem('password', password);
-                                document.cookie = 'username=' + username;
-                                document.cookie = 'password=' + password;
-                                callback();
-                            },
-                            error: function () {
-                                //  console.log("There was an error. Please try again.");
-                                $(".se-pre-con").fadeOut("slow");
-                                $(".alert-danger").html("Check Your User Name and Password.");
-                                $("#danger").css("display", "block");
-                                callback('Error');
-                            }
-                        });
-                    });
-                }, error: function () {
-                    //console.log("There was an error. Please try again.");
-                    $(".se-pre-con").fadeOut("slow");
-                    $("#danger").css("display", "block");
-                    $(".alert-danger").html("Check Your User Name and Password.");
-                    callback('Error');
-                }
-            });
-        },
-        //function (callback) {
-            // alert('1-' + username + password + spiderG['loginToken'] + spiderG['loginTokenTS']);
-            //getProducts(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
-       // },
-        //function (callback) {
-            // alert('2-' + username + password + spiderG['loginToken'] + spiderG['loginTokenTS']);
-
-        //    getLocationID(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
-        //},
-        //function (callback) {
-
-            //alert('3-');
-            // generateRfq();
-
-       // },
-        function (callback) {
-            submitData(username, password, spiderG['loginToken'], spiderG['loginTokenTS'], callback);
-            //callback();
-        }
-    ],
-      function (err, results) {
-          if (err) {
-              // alert('in err'); //
-          }
-          else {
-              $("#loginanchortag").hide();
-              $(".modal-open").css("overflow", "scroll");
-              jQuery("#div_session_write").load("/session_write.php?username=" + username);
-              $("#wizard").steps('next');
-              //window.open("http://app.spiderg.com/#/login?username=" + username + "&password=" + password);
-              //window.open("/index.php?username=" + username);
-
-          }
-      });
-}
-
+}  
 function getProducts(username, password, loginToken, loginTokenTS, cb) {
     $.ajax({
         url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product",
@@ -714,58 +792,7 @@ var saveDataInputs = function () {
             });
         }
     });
-}
-function customcall(myordid, callback) {
-    var username = localStorage.getItem('username');
-    var password = localStorage.getItem('password');
-    var myid = localStorage.getItem('sess_id');
-    myprodarr = myid.split(',');
-    myprid = myprodarr[0];
-    var qty = localStorage.getItem('starttext_1');
-    var dnoes = localStorage.getItem('centertext_1');
-    var dloc = localStorage.getItem('endtext_1');
-    var uom = localStorage.getItem('uomtext_1');
-    var func = new Date();
-    var docNo = "EN/" + func.getDate() + "/" + (func.getMonth() + 1) + "/" + func.getFullYear() + "/" + (func.getTime() + counter);
-    counter++;
-    var d =parseInt(new Date().getTime() / 1000);
-    var product = { "documentno": docNo, "issuedate": d, "currency": "INR", "deliverylocation": dloc, "bpartner": myordid, "notes": dnoes, };
-    var str = JSON.stringify(product);
-    spiderG.getLoginToken(username, function (err, authheader) {
-        var loginToken = spiderG['loginToken'];
-        var loginTokenTS = spiderG['loginTokenTS'];
-        $.ajax({type:"POST",url:"http://vpn.spiderg.com:8081/SpiderGAPIServer/api/rfq",data:str,contentType:'application/json',dataType: 'text',headers:{'SPIDERG-API-Key':'e5e3b300-31e9-4ad2-a705-4f8935218fcb','SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS)},success: function (data){
-				rfqid = data; 
-                    var rfqitem = { "rfqid": rfqid, "lineno": "1", "product": myprid, "quantity": qty, "uom": uom, "notes": dnoes };
-                    var strrfqitem = JSON.stringify(rfqitem);
-                    $.ajax({
-                        type: "POST", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/rfqlineitem", data: strrfqitem, contentType: 'application/json',dataType: 'text'
-                    , headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) }
-                    , success: function (data) { 
-                            var mail_rfq = { "receiverorg": myordid, "dtype": "rfq", "documentid": rfqid };
-                            var str = JSON.stringify(mail_rfq);
-                            $.ajax({type: "POST", url: "http://vpn.spiderg.com:8081/SpiderGAPIServer/api/mailbox", data: str, contentType: 'application/json' ,dataType: 'text'                          , headers: { 'SPIDERG-API-Key': 'e5e3b300-31e9-4ad2-a705-4f8935218fcb', 'SPIDERG-Authorization': "SPIDERGAUTH " + createAuthenticationHeader(username, password, loginToken, loginTokenTS) },success: function (mailresponse) { 
-									callback();
-                                },
-                                error: function (err) {
-                                    $(".se-pre-con").fadeOut("slow");
-                                    alert("Error in Enquiry."); 
-                                }
-                            }); 
-						},error: function (err) {
-                            $(".se-pre-con").fadeOut("slow");
-                            alert("Error in Enquiry.");
-                        }
-                    }); 
-                status = 1;
-            },error: function (err) { 
-				console.log(err);
-                $(".se-pre-con").fadeOut("slow");
-                alert("Error in Enquiry."); 
-            }
-        });
-    });
-}
+} 
 function addSupplier(event) {
     var _supplier = event.target.name;
     var _api = event.target.parentElement.parentElement.parentElement.firstChild.textContent;

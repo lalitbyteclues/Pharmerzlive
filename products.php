@@ -1,120 +1,173 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pharmerz">
   <?php session_start();
  include('head.php'); ?> 
-<body class="cms-index-index" >
+<body ng-controller="productscontroller"  ng-cloak>
 <style type="text/css">.APILIST {height: 200px;overflow: auto;}</style>
 <link rel="stylesheet" type="text/css" href="/css/slidernav.css" media="screen, projection" />
-  <div class="page"> 
-  <!-- Header -->
-    <?php include('inner_menu.php'); ?>
-  <!-- end nav --> 
-   <!-- **************************************************************************************************** -->
-  <div id="wizard">
-    <h1>Select Products</h1>
-<div>
-<span id="error1" style="color: Red; display: none">* No Records Found</span>
-<img src="/tinymce/skins/lightgray/img/loader.gif" id="productloader">
-<div id="slider"> 
-	<div class="slider-content">
-	 <ul><li id="a"><a name="a" class="title">A</a>
-	 <ul id="API-A"></ul>
-			</li>
-			<li id="b"><a name="b" class="title">B</a>
-				<ul id="API-B"> 
-				</ul>
-			</li>
-			<li id="c"><a name="c" class="title">c</a>
-				<ul  id="API-C"> </ul>
-			</li>
-			<li id="d"><a name="d" class="title">d</a>
-				<ul  id="API-D">  </ul>
-			</li>
-			<li id="e"><a name="e" class="title">E</a>
-				<ul  id="API-E"></ul>
-			</li>
-			<li id="f"><a name="f" class="title">f</a>
-				<ul  id="API-F"></ul>
-			</li>
-			<li id="g"><a name="g" class="title">g</a>
-				<ul  id="API-G"></ul>
-			</li>
-			<li id="h"><a name="h" class="title">h</a>
-				<ul  id="API-H"></ul>
-			</li>
-			<li id="i"><a name="i" class="title">i</a>
-				<ul  id="API-I"></ul>
-			</li>
-			<li id="j"><a name="j" class="title">j</a>
-				<ul  id="API-J"></ul>
-			</li>
-			<li id="k"><a name="k" class="title">k</a>
-				<ul  id="API-K"></ul>
-			</li>
-			<li id="l"><a name="l" class="title">l</a>
-				<ul  id="API-L"></ul>
-			</li>
-			<li id="m"><a name="m" class="title">m</a>
-				<ul  id="API-M"></ul>
-			</li>
-			<li id="n"><a name="n" class="title">n</a>
-				<ul id="API-N"></ul>
-			</li>
-			<li id="o"><a name="o" class="title">o</a>
-				<ul  id="API-O"> </ul>
-			</li>
-			<li id="p"><a name="p" class="title">p</a>
-				<ul  id="API-P"></ul>
-			</li>
-			<li id="q"><a name="q" class="title">q</a>
-				<ul  id="API-Q"></ul>
-			</li>
-			<li id="r"><a name="r" class="title">r</a>
-				<ul  id="API-R"></ul>
-			</li>
-			<li id="s"><a name="s" class="title">s</a>
-				<ul  id="API-S"></ul>
-			</li>
-			<li id="t"><a name="t" class="title">t</a>
-				<ul id="API-T"></ul>
-			</li>
-			<li id="u"><a name="u" class="title">u</a>
-				<ul  id="API-U"></ul>
-			</li>
-			<li id="v"><a name="v" class="title">v</a>
-				<ul  id="API-V"></ul>
-			</li>
-			<li id="w"><a name="w" class="title">w</a>
-				<ul  id="API-W"></ul>
-			</li>
-			<li id="x"><a name="x" class="title">x</a>
-				<ul  id="API-X"></ul>
-			</li>
-			<li id="y"><a name="y" class="title">y</a>
-				<ul  id="API-Y"></ul>
-			</li>
-			<li id="z"><a name="z" class="title">z</a>
-				<ul  id="API-Z"></ul>
-			</li>
-		</ul>
+<?php include('inner_menu.php'); ?>
+<section class="container-fluid hero"></section>
+	<section class="product-selections bg-darkblue">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 dots step-item" ng-class="tabstatus==1?'active':''">
+					<div ng-click="selectproducts()" class="numbers"  ng-style="tabstatus==2?{'cursor':'pointer'}:''"><span>1</span></div>
+					<p  ng-click="selectproducts()" ng-style="tabstatus==2?{'cursor':'pointer'}:''">Select Product</p>
+				</div>
+				<!--<div class="col-sm-4 dots step-item">
+					<div class="numbers"><span>2</span></div>
+					<p>Select Supplier</p>
+				</div>-->
+				<div class="col-sm-6 step-item"  ng-class="tabstatus==2?'active':''"> 
+					<div class="sendenquiry">
+						<div class="numbersright"><span>2</span></div>
+						<p>Send Enquiry</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="sortings bg-lightgrey" ng-show="tabstatus==1">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<span>Sort by</span>
+					<ul class="nav nav-pills pull-right">						
+						<li ng-class="sortby=='name'?'active':''" ><a ng-click="changesortorder('name')" href="javascript:void(0);">Product</a></li>
+						<li ng-class="sortby=='category_name'?'active':''" ><a ng-click="changesortorder('category_name')" href="javascript:void(0);">Category</a></li>
+						<li ng-class="sortby=='suppliername'?'active':''" ><a ng-click="changesortorder('suppliername')" href="javascript:void(0);">Suppliers</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>  
-</div> 
-    <h1 style="text-align: centre;">Select Suppliers</h1>
-    <div> <div id='div_session_write'> </div>
-      <div class="col-md-3"><div class="show_before" id="selectedApi1"></div></div>
-      <div class="col-md-3"><div class="show_before" id="selectedApi2"></div></div>
-      <div class="col-md-3"><div class="show_before" id="selectedApi3"></div></div>
-      <div class="col-md-3"><div class="show_before" id="selectedApi4"></div></div>
-    </div> 
-    <h1 style="text-align: centre;">Send Enquiry</h1> 
-    <div>
-      <div id="valuesForm"></div>
-    </div> 
-  </div>  <!-- End id=wizard --> 
-</div> 
-</div> 
+	<section class="container alphabets" ng-show="tabstatus==1">
+		<div class="row">
+			<ul class="col-sm-12 nav nav-pills">
+				<li ng-class="character=='a'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('a')">A</a></li>
+				<li ng-class="character=='b'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('b')">B</a></li>
+				<li ng-class="character=='c'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('c')">C</a></li>
+				<li ng-class="character=='d'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('d')">D</a></li>
+				<li ng-class="character=='e'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('e')">E</a></li>
+				<li ng-class="character=='f'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('f')">F</a></li>
+				<li ng-class="character=='g'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('g')">G</a></li>
+				<li ng-class="character=='h'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('h')">H</a></li>
+				<li ng-class="character=='i'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('i')">I</a></li>
+				<li ng-class="character=='j'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('j')">J</a></li>
+				<li ng-class="character=='k'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('k')">K</a></li>
+				<li ng-class="character=='l'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('l')">L</a></li>
+				<li ng-class="character=='m'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('m')">M</a></li>
+				<li ng-class="character=='n'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('n')">N</a></li>
+				<li ng-class="character=='o'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('o')">O</a></li>
+				<li ng-class="character=='p'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('p')">P</a></li>
+				<li ng-class="character=='q'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('q')">Q</a></li>
+				<li ng-class="character=='r'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('r')">R</a></li>
+				<li ng-class="character=='s'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('s')">S</a></li>
+				<li ng-class="character=='t'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('t')">T</a></li>
+				<li ng-class="character=='u'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('u')">U</a></li>
+				<li ng-class="character=='v'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('v')">V</a></li>
+				<li ng-class="character=='w'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('w')">W</a></li>
+				<li ng-class="character=='x'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('x')">X</a></li>
+				<li ng-class="character=='y'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('y')">Y</a></li>
+				<li ng-class="character=='z'?'active':''"><a href="javascript:void(0);" ng-click="searchtext('z')">Z</a></li>
+			</ul>
+		</div> 
+		<div class="row description" >		
+			<div ng-show="products.length>0" class="col-sm-4 description-item" ng-repeat="data in products | orderBy:sortby">
+				<article class="border">
+					<small>Product</small>
+					<img class="img-responsive pull-right" ng-show="data.category_name=='Fine Chemicals' && data.imgurl==null" style="height:60px;width:60px;"  src="images/fine chemicals.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Intermediates Excipients' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Intermediates Excipients.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Lab Equipment' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Lab Equipments.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Nutraceuticals' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Nutraceuticals.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Herbals' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Herbals.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Services' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Services.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='PCD Companies' && data.imgurl==null" style="height:60px;width:60px;"   src="images/PCD Companies.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Regulatory' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Regulatory.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Plant Machinery' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Plant Machinary.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Brand' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Regulatory.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Packaging' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Packging.png" />
+	    	    	<img  class="img-responsive pull-right" ng-show="data.category_name=='Active Pharmaceutical Ingredients (API)' && data.imgurl==null" style="height:60px;width:60px;"   src="images/api.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Finished Formulation' && data.imgurl==null" style="height:60px;width:60px;"   src="images/finishedFormulation.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Wholesale Dealers' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Wholsale Dealers.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Veterinary' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Veternary.png" />
+	    	    	<img class="img-responsive pull-right" ng-show="data.category_name=='Pellets' && data.imgurl==null" style="height:60px;width:60px;"   src="images/Pellets.png" /> 
+					<img src="{{data.imgurl}}" ng-show="data.imgurl!=null"  style="height:60px;width:60px;" class="img-responsive pull-right" />
+					<p class="product">{{data.name}}</p> 
+					<small>Category</small>
+					<p class="category">{{data.category_name}}</p>
+					<small>Supplier</small>
+					<p class="supplier">{{data.suppliername}}</p>
+					<a href="javascript:void(0);" ng-click="sendproductenquiry(data)"> Send Enquiry</a>
+				</article>
+			</div> 
+			<span id="error1" ng-hide="isbusy || products.length > 0" style="color: Red;">* No Records Found</span>
+			<img src="/tinymce/skins/lightgray/img/loader.gif" style="margin-left:48%;" ng-show="isbusy">
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 hard-right">
+				<div infinite-scroll="changepageno()" infinite-scroll-distance="3"></div>
+			</div>
+		</div>
+	</section>  
+	<article class="container contact-us" ng-show="tabstatus==2">
+		<div class="row">
+			<div class="col-sm-12">
+				<a href="javascript:void();"  ng-click="selectproducts()">Back</a>
+			</div>
+			<img src="/tinymce/skins/lightgray/img/loader.gif" ng-show="isbusy">
+			<div class="col-sm-6 form-inline" ng-hide="isbusy"   >
+		<form class="text-left"   ng-submit="sendenquiry()">
+			 <div class="form-group" style="width:100%;"><label> Product: </label>  {{product.name}}  </div>
+			  <div style="clear:both;">	&nbsp;		 </div>
+			 <div class="form-group" style="width:100%;"><label><b> Send TO: </b> </label> {{product.suppliername}} </div> 
+ <div style="clear:both;">	&nbsp;		 </div>			 
+			 <div class="form-group" style="width:100%;">
+			   <label> Quantity: </label>
+				 <input type='number' ng-model="quantity" onkeypress='javascript:return isNumber(event)' class='form-control' 
+				 data-type='quantity' style='margin-top: 10px;'   placeholder='Enter Quantity...' required />
+			 </div>  
+			 <div style="clear:both;">	&nbsp;		 </div>
+			 <div class="form-group" style="width:100%;">
+			   <label> Location: </label>
+			    <select name="location" style="width:100%;" class="form-control input-md" ng-model="locationid" placeholder="Select Location" required="required"   id="typchkk">
+					<option value="">Select Location</option>
+					<option  ng-repeat="data in locations" value="{{data.id}}">{{data.addressline1}}{{data.addressline2}}{{data.postalcode}}</option> 
+				</select> 
+			 </div>   <div style="clear:both;">	&nbsp;		 </div>
+			  <div class="form-group" style="width:100%;">
+			   <label> UOM: </label>
+			    <select name="UOM" style="width:100%;" class="form-control input-md" ng-model="uomid" placeholder="Select UOM" required="required"   id="typchkk">
+					<option value="">Select UOM</option>
+					<option  ng-repeat="data in uom" value="{{data.id}}">{{data.name}}</option> 
+				</select> 
+			 </div>   <div style="clear:both;">	&nbsp;		 </div>
+			  <div class="form-group" style="width:100%;">
+			  <label> Your Message: </label>
+				 <textarea  class='form-control'  ng-model="message"  data-type='notes' style='margin-top: 10px;'
+				 name='notes[]' placeholder='Delivery notes...'></textarea>
+			 </div>  <div style="clear:both;">	&nbsp;		 </div>
+			 <div class="form-group" style="width:100%;">
+			 <button type="submit" class="btn btn-lg pull-right push-top push-bottom" style="color:#fff;">Send Inquiry</button> 
+			 </div>
+		 </form>
+		</div>
+		</div>
+	</article>
+	<section class="contact-us text-center">
+	<article  >
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					 
+				</div>
+			</div>
+		</div>
+	</article>
+	</section>
+ <?php include('footer.php'); ?> 
  <div  role="dialog" tabindex="-1" id="login-modal" class="modal modal-login">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -127,7 +180,7 @@
       <div class="panel panel-login" > 
 	  <div class="col-md-12">
                     <div class="col-xs-6">
-                      <a href="#" class="text-primary" class="active" id="login-form-link"><h4 class="modal-title text-center">Login</h4></a>
+                      <a href="javascript:void(0);" class="text-primary" class="active" id="login-form-link"><h4 class="modal-title text-center">Login</h4></a>
                     </div>
                     <div class="col-xs-6"> 
                       <a href="/signup.php" class="text-primary" ><h4 class="modal-title text-center">Buyer Registration</h4></a>  </div>
@@ -149,7 +202,7 @@
                         <div class="form-group"> 
                             <div class="col-sm-6 col-sm-offset-3">
                               <input type="button" name="login-submit" id="login-submit" tabindex="4" class="btn btn-primary" 
-							  value="Log In" onClick="submitLoginForm()">
+							  value="Log In" ng-click="submitLoginForm()">
                          </div>
                         </div>
 						 <div class="form-group"> 
@@ -165,28 +218,15 @@
                   </div>
                 </div>
 				</div>  
-				</div>  
-				</div> 
-				</div>  
-				</div> 
-				</div>  
- <!-- Footer -->
- <?php include('footer.php'); ?>
-  <!-- End Footer --> 
-<div class="social">
-         <ul>
-            <li class="fb"><a href="https://www.facebook.com/pharmerzz" target="_blank" ></a></li>
-            <li class="tw"><a href="https://twitter.com/PharmerzT" target="_blank" ></a></li>
-            <li class="googleplus"><a href="#" target="_blank" ></a></li>
-            <li class="rss"><a href="#" target="_blank" ></a></li>
-            <li class="pintrest"><a href="#" target="_blank" ></a></li>
-            <li class="linkedin"><a href="https://www.linkedin.com/company/pharmerz" target="_blank" ></a></li>
-            <li class="youtube"><a href="https://www.youtube.com/channel/UC6C1uwIbZEziq8rfN-qW0-A" target="_blank" ></a></li>
-         </ul>
-      </div>
-
-<!-- JavaScript --> 
+		    	</div>  
+			</div> 
+		</div>  
+	</div> 
+</div>  
+<div id="div_session_write"><div>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/libs/angular.min.js"></script>
+<script type="text/javascript" src="/js/libs/ng-infinite-scroll.min.js"></script>
 <script>
  $( document ).ready(function() {
   var searchitem = "<?php if(isset($_GET['namelike'])){ echo $_GET['namelike']; }else{echo "";}?>"
@@ -216,7 +256,7 @@
 <!-- <script src="/js/myscript.js" type="text/javascript"></script> -->
 <script type="text/javascript" src="/js/wow.min.js"></script>
 <script type="text/javascript" src="/js/application/jquery.validate.js"></script>
-<script type="text/javascript" src="/js/application/popup.js"></script>
+<script type="text/javascript" src="/js/application/popup.js"></script> 
 <script type="text/javascript" src="/js/slidernav.js"></script>
  <script type="text/javascript" src="/js/application/suppliers.js"></script>
  <script type="text/javascript">

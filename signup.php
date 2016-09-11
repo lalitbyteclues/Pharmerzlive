@@ -12,6 +12,8 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
   <div class="page"  ng-conroller="suppliersListCtrl"> 
   <!-- Header -->
      <?php include('inner_menu.php'); ?>  
+	  <section class="container-fluid hero"></section>
+	  <br>
       <div id = "registration">
         <div class="container" style="width: auto;">
             <div class="row">
@@ -121,7 +123,7 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
           </div>
       </div>  
   </div>
-
+<br>
 </div>
 </div>
   <!-- Footer -->
@@ -150,8 +152,7 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
 <script type="text/javascript" src="/js/application/sweetalert.min.js"></script>
 <script type="text/javascript" src="/js/application/custom.js"></script>
 <script type="text/javascript" src="/js/application/ankcustm.js"></script>
-<script type="text/javascript" src="/js/application/suppliers.js"></script>
-<!--<script type="text/javascript" src="/js/application/spidergcon.js"></script> -->
+<script type="text/javascript" src="/js/application/suppliers.js"></script> 
 <script type="text/javascript" src="/js/application/loginForm.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script> 
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>

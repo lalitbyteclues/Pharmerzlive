@@ -32,323 +32,361 @@ if(isset($_GET['username']))
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="pharmerz">
   <?php include('head.php'); ?> 
-   <body class="cms-index-index" bgcolor="#E6E6FA">
-      <div class="page">
-          <!--===header start===-->
-        <div class="container">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                  <div class="imageo">
-                        <a href="/"><img src="/images/pharmerz_logo2 .png" class="img-responsive" width="100%"></a> 
-                  </div>
-            </div> 
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 gg1">
-                  <div class="coco">
-	 <form class="input-group wer" method="get" id="searchproduct" action="/products.php"> 
-         <input type="text" required class="form-control"  onkeypress="return IsAlphaNumeric(event);"  name="namelike" id="search" placeholder="Search Product" aria-describedby="basic-addon2">
-         <span class="input-group-addon" onclick="document.getElementById('searchproduct').submit();" id="basic-addon2">&nbsp;&nbsp;&nbsp;<i class="fa fa-search">&nbsp;&nbsp;</i></span>
-       <input type="submit" style="display:none;" id="submitbtn"  />
-	   </form>
-    </div>     
-            </div>
-                               
-           <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                <div class="line">
-                     <ul class="list-inline text-right">
-                         <li class="active"><a href="#"><i class="fa fa-question"></i>
-                         <br />FAQ</a></li> 
-                         <?php if($_SESSION['user_id'] != ''){ ?>
-                          <li><a href="/home/index.php"><i class="fa fa-user"></i><br />Account</a></li>
-						  <li><a href="/home/logout.php"><i class="fa fa-sign-out"></i><br />Log Out</a></li>
-                           <?php }else{?>
-                        <li><a href="/signup.php"><i class="fa fa-user"></i>
-                          <br />Account</a></li>
-                          <?php } ?> 
-                     </ul> 
-                </div>
-           </div>  
-             <div class="clearfix"></div>
-        </div> 
-        <nav>
-            <div class="container">
-               <div class="nav-inner">
-                  <!-- mobile-menu -->
-                  <div class="hidden-desktop" id="mobile-menu">
+   <body>
+    <?php include('inner_menu.php'); ?>  
+	<section class="container-fluid">
+		<!-- <div class="container"> -->
+			<div class="row">
+				<div id="crousel" data-ride="carousel" class="carousel slide slider">
+					<ol class="carousel-indicators">
+						<li data-target="#crousel" data-slide-to="0" class="active"></li>
+						<li data-target="#crousel" data-slide-to="1"></li>
+						<li data-target="#crousel" data-slide-to="2"></li>
+						<li data-target="#crousel" data-slide-to="3"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active" style="background-image:url('images/slider_1.png')">
+							<!-- <img class="img-responsive" src="images/banner.jpg"> 
+							<p>Number of category on your Fingertips</p>-->
+						</div>
+						<div class="item" style="background-image:url('images/slider_2.png')">
+							<!-- <img class="img-responsive" src="images/banner.jpg"> 
+							<p>Number of category on your Fingertips </p>-->
+						</div>
+						<div class="item" style="background-image:url('images/slider_3.png')">
+							<!-- <img class="img-responsive" src="images/banner.jpg"> 
+							<p>text 1</p>-->
+						</div>
+						<div class="item" style="background-image:url('images/slider_4.png')">
+							<!-- <img class="img-responsive" src="images/banner.jpg"> 
+							<p>text 2</p>-->
+						</div>
+					</div>
+					<a class="left carousel-control" href="#crousel" role="button" data-slide="prev">
+						<img src="images/left.png">					      		
+			    </a>
+			   	<a class="right carousel-control" href="#crousel" role="button" data-slide="next">
+			      <img src="images/right_40.png">
+			    </a>
+				</div>
+			</div>
+		<!-- </div> -->
+	</section>
+	<section class="container hero-section">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>JOIN US ON THE PATH TO <br>
+					<strong>Simplify your business with the <br>
+						strategy they deserve.
+					</strong>
+				</h2>
+				<p>
+					Pharmerz provides best decision making tool for Pharmaceutical Industry with vision to organize global pharmaceutical market.
+				</p>
+				<p>
+					Our Online Trade Marketplace will help you to connect & reach your
+					maximum vitality.
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<img class="img-responsive" src="images/Untitled-2.png">
+			</div>
+		</div>
+	</section>
+	<section class="container push-bottom soft-bottom-45">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="text-center lines-effects"><span>Featured <strong>Categories</strong></span></h2> 
+        <div class="flexslider carousel"  > 
+          <ul class="slides"> 
+		<?php  
+		 $headers = array("Content-Type: application/json","SPIDERG-API-Key:" . 'e5e3b300-31e9-4ad2-a705-4f8935218fcb',"SPIDERG-Authorization: " .'SPIDERGAUTH register');  
+		 $objectData = '{}';  
+		 $rest = curl_init();  
+		 curl_setopt($rest,CURLOPT_URL,'http://vpn.spiderg.com:8081/SpiderGAPIServer/api/product/category');  
+		 curl_setopt($rest,CURLOPT_HTTPHEADER,$headers);  
+		 curl_setopt($rest,CURLOPT_SSL_VERIFYPEER, false);  
+		 curl_setopt($rest,CURLOPT_RETURNTRANSFER, true);  
+		 $response = json_decode(curl_exec($rest)); 
+		 foreach ($response as $data)
+		 { ?> 
+		 <li>
+		 <a href="products.php?categoryid=<?php echo $data->id; ?>"> 
+			<img src="<?php echo $data->name=='Fine Chemicals'?'images/fine chemicals.png':($data->name=='Intermediates Excipients'?'images/Intermediates Excipients.png':($data->name=='Lab Equipment'?'images/Lab Equipments.png':( $data->name=='Nutraceuticals'?'images/Nutraceuticals.png':($data->name=='Herbals'?'images/Herbals.png':($data->name=='Services'?'images/Services.png':($data->name=='PCD Companies'?'images/PCD Companies.png':($data->name=='Regulatory'?'images/Regulatory.png':($data->name=='Plant Machinery'?'images/Plant Machinary.png':($data->name=='Brand'?'images/Regulatory.png':($data->name=='Packaging'?'images/Packging.png':($data->name=='Active Pharmaceutical Ingredients (API)'?'images/api.png':($data->name=='Finished Formulation'?'images/finishedFormulation.png':($data->name=='Wholesale Dealers'?'images/Wholsale Dealers.png':($data->name=='Veterinary'?'images/Veternary.png':($data->name=='Pellets'?'images/Pellets.png':'')))))))))))))))?>" />   
+			<figcaption><?php echo $data->name;?></figcaption></a>
+			</li> 
+			<?php  } 
+		 curl_close($rest);
+		 ?> 
+		 </ul>
+        </div>
+			</div>
+		</div>
+	</section>
+	<section class="bg-blue video-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1 class="text-center">An Online <strong>MarketPlace</strong> for <strong>Pharmaceutical</strong> Industry</h1>
+					<div class="embed-responsive embed-responsive-16by9">
+					  	<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/E-3VSZ91Ijs" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="container soft-top-20 intro-section">
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+				<ul class="nav nav-stacked intro-side-nav">
+		          <li class="active"><a href="#What" data-toggle="tab">WHAT is Pharmerz</a></li>
+		          <li><a href="#Who" data-toggle="tab">Who Can Join Pharmerz?</a></li>
+		          <li><a href="#Why" data-toggle="tab">Why Should You Join Pharmerz?</a></li>
+		          <li><a href="#When" data-toggle="tab">When Should You Join Pharmerz?</a></li>
+		          <li><a href="#How" data-toggle="tab">HOW it works?</a></li>
+		          <li><a href="#Where" data-toggle="tab">Where is Pharmerz located?</a></li>
+				   <li>&nbsp;</li>
+     			</ul>
+			</div>
+			<div class="col-sm-8 col-md-9">
+				<div class="tab-content">
+	                <div class="tab-pane active" id="What">
+	                	<h2 class="push-top">WHAT is <strong>Pharmerz?</strong></h2>
+	                	<p>
+							Pharmerz is an online marketplace focused on pharmaceutical industry. A platform where all pharmaceutical industry players can connect, transact and collaborate with each other.It focuses on providing a single platform to all kind of industry players ranging from Individual Buyers and Sellers, Small and Medium Enterprises (SMEs) to large Corporate
+						</p>
+						<p>
+							It provides access to wider marketplace and diverse portfolio of products catering to all your business requirements. Pharmerz focus to offer one-stop-shop solution to manufacturers, importers, exporters, traders, suppliers, distributors, dealers, agencies and service providers, where one can meet and engage with global business community
+	                	</p>
+	                </div>
+	                <div class="tab-pane" id="Who">
+	                	<h2 class="push-top">Who Can Join <strong>Pharmerz?</strong></h2>
+	                	<p> Any Pharmaceutical Industry B2B Player can use this platform for their Business Needs, who can be:
+						</p>
+						<ul>
+						<li>Manufacturers</li>
+						<li>Importers</li>
+						<li>Exporters</li>
+						<li>Traders</li>
+						<li>Suppliers</li>
+						<li>Distributers</li>
+						<li>Dealers</li>
+						<li>Agencies</li>
+						<li>Service Providers</li>
+						</ul>
+	                </div>
+	                <div class="tab-pane" id="Why">
+	                	<h2 class="push-top">Why Should You Join <strong>Pharmerz?</strong></h2>
+	                	<p>
+							You should join Pharmerz and make
+						</p>
+						<ul>
+						<li>Your Business grow bigger</li>
+						<li>Higher Profitability</li>
+						<li>Faster Connectivity</li>
+						<li>Cheaper transactions</li>
+						<li>Smoother processes</li> 
+						</ul>
+	                </div>
+	                <div class="tab-pane" id="When">
+	                	<h2 class="push-top">When Should You Join <strong>Pharmerz?</strong></h2>
+	                	<p>
+						  At any point of time in your business lifecycle, whether its startup, growth, maturity or even decline, you can join us. Pharmerz provides you an ample amount of resources and connections, which can help you in your business needs irrespective of the stages of your business life cycle.
+						</p> 
+	                </div>
+	                <div class="tab-pane" id="How">
+	                	<h2 class="push-top">How <strong>Pharmerz</strong> Works?</h2>
+	                	<p>
+							Pharmerz Simplifies Your Business through the following Simple task flow.
+						</p>
+						<p>
+						Enter Product Detail ->
 
-                     <ul class="navmenu nom1">
-                      <li><a href="javascript:void(0);" class="pull-right" id="nomo"><i class="fa fa-bars"><span>Categories</span></i></a></li>
-                        <li>
-                           <div class="menutop" >
-                              <div class="toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></div>
-                              <h2>Menu</h2>
-                           </div>
-                           <ul style="display:none;" class="submenu">
-                              <li>
-                                 <ul class="topnav">
-                                    <li class="level0 nav-6 level-top first parent">
-                                       <a class="level-top" href="/"> <span>Home</span> </a>
-                                    </li>
-                                    <li class="level0 nav-7 level-top parent"> <a class="level-top" href="/about_us.php"> <span>About Us</span> </a> </li>
-                                    <li class="level0 nav-6 level-top">
-                                       <a class="level-top" href="/products.php" id="apiLink"> <span>Products</span> </a>                                      
-                                    </li>
-                                    <li class="level0 nav-7 level-top parent"> <a class="level-top" href="#"> <span>Support</span> </a> </li>                                   
-                                    <li class="level0 parent drop-menu">
-                                       <a href="/blog.php"><span>Blog</span> </a></li>
-                                    <li class="level0 nav-9 level-top last parent "> <a class="level-top" href="/contact_us.php"> <span>Contact Us</span> </a> </li>
-                                    <?php if($_SESSION['user_id'] == ''){ ?>
-                                    <li class="level0 parent drop-menu"><a href="/signup.php" ><span>LogIn</span></a></li> 
-                                    <?php }?>
-                                 </ul>
-                                 <!--menu-right end--> 
-                              </li>
-                           </ul>
-                        </li>
-                     </ul>
-                     <!--navmenu-->
-                  </div>
-                  <!--End mobile-menu -->
-                 <ul id="nav" class="hidden-xs pull-left nom">
-                     <li><a href="javascript:void(0);" id="nomo1"><i class="fa fa-bars"><span>Categories</span></i></a></li>
-                 </ul>     
-                  <ul id="nav" class="hidden-xs pull-right n1" style="display:block;">
-                     <li class="level0 parent drop-menu">
-                        <a href="/" class="active"><span>Home</span> </a>
-                     </li>
-                       <li class="level0 parent drop-menu"> <a href="/about_us.php" class="level-top"> <span>About Us</span> </a></li>
-                     <li class="level0 parent drop-menu">
-                        <a href="/products.php"><span>Products</span> </a>
-                       
-                     </li>
-                     <li class="level0 parent drop-menu"> <a href="#" class="level-top"> <span>Support</span> </a></li>
-                     <li class="level0 parent drop-menu"> <a href="/contact_us.php" class="level-top"> <span>Contact Us</span> </a>
-                     <li class="level0 parent drop-menu"><a href="/blog.php"><span>Blog</span> </a></li>
-                    <?php if($_SESSION['user_id'] == ''){ ?>
-                    <li class="level0 parent drop-menu"><a href="/signup.php"><span>LogIn</span></a></li> 
-                    <?php } ?>
-                  </ul>
-               </div>
-            </div>
-         </nav>
-         <!-- Navbar -->
-         <!-- end nav -->
-          <div class="ooop">  
-            <div class="container">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gg">
-                    <div class="sido" id="sido1"> 
-                          <ul id="mycate">
-                                 </ul>  
-                      </div>
-                  </div> 
-                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 gg1">
-                  </div>        
-               </div>   
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <!--===header end===-->
-      <!-- Navbar --> 
-<!--==section start==-->
-<div class="container addo">
-   <!--==section-1 end==-->
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?php $get_user = mysqli_query($conn,"SELECT * FROM `home_advert` WHERE CATID in(SELECT ID FROM `homecategory` WHERE istop=1)");
-             if(mysqli_num_rows($get_user)>0)
-             { while($queRow = mysqli_fetch_array($get_user))
-				{ $base_url = '/';  ?>
-           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-               <div class="adva">
-                   <a href="#"> <img src="<?php echo $base_url.$queRow['image']?>" class="img-responsive" width="100%;"></a> 
-               </div>
-           </div>
-        <?php  }}?> 
-      </div>
-   <!--==section-1 end==-->
+Search For Supplies ->
 
-   <!--==section-2 start==-->
-       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-           <div class="auuiu">
-               <p>See What's Trending</p>
-           </div> 
-           <div class="sect-1_slider">
-               <div class="main">
-            <div id="mi-slider" class="mi-slider">
-			 <?php $magesfooter = mysqli_query($conn,"SELECT * FROM `home_advert` WHERE CATID in(SELECT ID FROM `homecategory` WHERE istop=0)");
-             if(mysqli_num_rows($magesfooter)>0){ 
-			 echo "<ul>";
-			 $catid=2;  
-			 while($queRow = mysqli_fetch_array($magesfooter)){
-			 if($catid != $queRow['CATID'])
-			 {
-			 $catid =$queRow['CATID'];
-			 echo "</ul><ul>";
-			 }
-			 ?> <li><a title="<?php echo $queRow['Title']; ?>" href="#"><img title="<?php echo $queRow['Title']; ?>" src="<?php echo $base_url.$queRow['image']?>" alt="<?php echo $queRow['Title']; ?>"><h4><?php echo $queRow['Title']; ?></h4></a></li>
-				<?php }
-			   echo "</ul>";
-			   } ?>
-                
-               <nav class="hu">
-			    <?php $categories = mysqli_query($conn,"SELECT * FROM `homecategory` WHERE istop=0");if(mysqli_num_rows($categories)>0){ while($queRow = mysqli_fetch_array($categories)){ ?> <a href="#"><?php echo $queRow['Name']; ?></a> <?php  } } ?></nav>
-            </div>
-         </div>
-           </div>
-       </div>  
-   <!--==section-2 end==-->
-</div> 
+Get the List of Suppliers ->
 
-<?php include('footer.php');?>
+Shortlist Suppliers on the basis of location, availability, rating, feedback ->
+
+Send Request for Quotation to selected Suppliers ->
+
+Receive Quotation from Suppliers ->
+
+Negotiate the terms through Chat ->
+
+Generate Purchase Order and share with Supplier ->
+
+Receive Invoice ->
+
+Exchange Payment details, Delivery Receipt, other Transaction related docs ->
+
+Sit back, Relax and Enjoy Seamless Service from PHARMERZ  
+	                	</p>
+	                </div>
+	                <div class="tab-pane" id="Where">
+	                	<h2 class="push-top">Where is <strong>Pharmerz</strong> located?</h2>
+	                	<p>
+							Pharmerz is an online market place that can be accessed anytime and from anywhere. Although we have currently two offices
+						<br/><br/><br/>
+						<b>MUMBAI</b><br/>
+						 C – 609, 6th Floor, Raga Building, Shell Colony Road, Chembur, Mumbai – 400071 
+						<br/><br/><br/>
+						<b>PUNE</b><br/><br/>
+						 Office No. 7, Bldg A-8, Meera Nagar CHS Ltd., Lane 7, Koregaon Park, Pune – 6 
+						</p>  
+	                </div> 
+          		</div>
+			</div>
+		</div>
+	</section> 
+<section class="contact-us text-center">
+	<article class="bg-lightestblue">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<p>Need help choosing us? Call us <strong>+91-7722074442</strong>
+					</p>
+				</div>
+			</div>
+		</div>
+	</article>
+	<article class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>How to <strong>Contact us?</strong></h2>
+			</div>
+			<div class="col-sm-12">
+				<form class="form-inline text-left" method="post" action="index.php">
+				  <div class="form-group">
+					<input type="text" class="form-control" required name="firstname" placeholder="Full Name">
+				  </div>
+				  <div class="form-group">
+					<input type="email" class="form-control" required name="email"  placeholder="Email">
+				  </div>
+				   <div class="form-group">
+					<input type="text" class="form-control" required name="company" placeholder="Company Name">
+				  </div>
+				  <div class="form-group">
+					<input type="tel" class="form-control" required name="phone" placeholder="Contact">
+				  </div>
+
+				   <div class="form-group">
+					<textarea class="form-control" required row="5" name="street1" placeholder="Address"></textarea>
+				  </div>
+				  <div class="form-group">
+					<textarea class="form-control" required row="5" name="comment" placeholder="Comment"></textarea>
+				  </div>
+				  <div class="form-group">
+					<a href="mailto:sales@pharmerz.com" class="push-top">
+						<span><img src="/images/mail.png"></span>
+						sales&commat;pharmerz.com</a>
+					<a href="tel:+91-7722074442">
+						<span><img src="/images/contact-icon-large.png"></span>
+						+91-7722074442
+					</a>
+				  </div>
+				  <div class="form-group">
+				   <button type="submit" name="submit" class="btn btn-lg pull-right push-top push-bottom">Submit</button>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</article>
+</section>
+<?php include('footer.php');
+
+if(isset($_POST['submit']))
+{
+   //unset($_SESSION['site2']);
+   if($_POST['firstname']!='' && $_POST['email']!='' && $_POST['phone']!='' && $_POST['street1']!='' && $_POST['comment']!='')
+   {
+      $firstname = $_POST['firstname'];
+      $email = $_POST['email'];
+      $company = $_POST['company'];
+      $phone = $_POST['phone'];
+      $street1 = $_POST['street1'];
+     // $street2 = $_POST['street2'];
+      $comment = $_POST['comment'];      
+      $q = "INSERT INTO `contact_us` (`first_name`,`email`,`comany`,`phone`,`street1`,`comment`) VALUES('$firstname','$email','$company','$phone','$street1','$comment')";
+      if(mysqli_query($conn,$q))
+      { 
+         $subject = 'Contact Us';
+         $message = 'User First Name :'.$firstname.'<br> User Email :'.$email.'<br> Comapny Name :'.$company.'<br> Phone :'.$phone.'<br> Street Address1 :'.$street1.'<br> Street Address2 :'.$street2.'<br> Comment :'.$comment;
+         //$message = 'hi';
+         $headers  = 'MIME-Version: 1.0' . "\r\n";
+         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+         $headers .= 'From: No Reply <no-reply@pharmerz>'; 
+         @mail('lalit.sharma@byteclues.com', $subject, $message, $headers);
+         $status = '0';
+		 echo '<script>alert("Thank you for contact us.");
+		 window.location.href = "/index.php";	 
+		 </script>';
+      }
+    }
+    else
+    {
+        $status = '1';
+    }
+}
 
 
+?>
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/libs/angular.min.js"></script>
+<script type="text/javascript" src="/js/libs/ng-infinite-scroll.min.js"></script>
+<!-- FlexSlider -->
+<script defer src="js/jquery.flexslider-min.js"></script> 
+<script type="text/javascript" src="/js/application/jquery.steps.js"></script> 
+<script type="text/javascript" src="/js/application/intlTelInput.min.js"></script>  
+<script type="text/javascript" src="/js/application/search_proank.js"></script>
+<script type="text/javascript" src="/js/application/custom.js"></script>
+<script type="text/javascript" src="/js/application/ankcustm.js"></script>
+<script type="text/javascript" src="/js/application/spidergcon.js"></script>
+<script src="http://pharmerz.com/admin/js/md5.js"></script> 
+<script type="text/javascript">
+     (function() {
+    	$('.search a').click(function() {
+    		$(this).prev('input').fadeToggle()
+    	})
 
-   <!-- Footer -
-      <footer class="footer">
-         <!-- End of brand-logo -
-         <div class="footer-middle container">
-            <div class="col-md-4 col-sm-4">
-               <div class="footer-logo"><a href="_index.html" title="Logo"><img src="/images/Picture1.png" width="50%" alt="logo"></a></div>
-               <div class="payment-accept">
-               </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 jki text-center">
-              
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">  
-                  <span><a style="color:#000;font-weight:bold;" href="#">Payment</a></span>
-               </div>
-               <!-- <a href="#" title="How to buy" style="padding-right: 40px;">How to buy</a>
-                  <a href="#" title="Payment">Payment</a> -
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-               <h4>Contact us</h4>
-               <div class="contacts-info">
-                  <address>
-                     <i class="add-icon">&nbsp;</i> C – 609, 6th Floor, Raga Building, Shell Colony Road<br>
-                     &nbsp;Chembur Mumbai – 400071
-                  </address>
-                  <div class="phone-footer"><i class="phone-icon">&nbsp;</i> +91 766661980</div>
-                  <div class="email-footer"><i class="email-icon">&nbsp;</i><a href="mailto:support@pharmerz.com" style="font-size: 14px;color:#000;">support@pharmerz.com</a> </div>
-               </div>
-            </div>
-         </div>
-         <div class="footer-bottom container">
-            <div class="col-sm-6 col-xs-12 coppyright"> &copy; 2015 Pharmerz. All Rights Reserved.</div>
-            <div class="col-sm-6 col-xs-12 copy text-center"> 
-              <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                  <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-              </ul>
-            </div>
-         </div>
-      </footer>
-      <!-- End Footer -->
-  
-     <!--  <div class="social">
-         <ul>
-            <li class="fb"><a href="#"></a></li>
-            <li class="tw"><a href="#"></a></li>
-            <li class="googleplus"><a href="#"></a></li>
-            <li class="rss"><a href="#"></a></li>
-            <li class="pintrest"><a href="#"></a></li>
-            <li class="linkedin"><a href="#"></a></li>
-            <li class="youtube"><a href="#"></a></li>
-         </ul>
-      </div> -->
-      <!-- JavaScript -->
-      <script type="text/javascript" src="/js/jquery.min.js"></script>
-      <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/application/spidergcon.js"></script> <script type="text/javascript" src="/js/application/jquery.steps.js"></script>
-    
-<script type="text/javascript" src="/js/application/intlTelInput.min.js"></script>  <script type="text/javascript" src="/js/common.js"></script>
-      <script type="text/javascript" src="/js/revslider.js"></script>
-      <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
-      <script type="text/javascript" src="/js/wow.min.js"></script>
-      <script type="text/javascript" src="/js/application/search_proank.js"></script>
-      <script type="text/javascript" src="/js/application/custom.js"></script>
-        <script type="text/javascript" src="/js/application/ankcustm.js"></script>
-        <script src="http://pharmerz.com/admin/js/md5.js"></script>
-       <script type="text/javascript">
-          $(document).ready(function(){
-            $('#nomo').click(function(){
-               $('#sido1').slideToggle(1000);
-             });
-             $('#nomo1').click(function(){
-               $('#sido1').slideToggle(1000);
-             });
-          });  
-      </script>
-      <script src="/js/jquery.catslider.js"></script>
-      <script>
-         $(function() {
-            $( '#mi-slider' ).catslider();
-            
-         });
-      </script>
-      <script type='text/javascript'>
-         jQuery(document).ready(function(){
-           jQuery('#rev_slider_4').show().revolution({
-             dottedOverlay: 'none',
-             delay: 5000,
-             startwidth: 1170,
-             startheight: 580,
-             hideThumbs: 200,
-             thumbWidth: 200,
-             thumbHeight: 50,
-             thumbAmount: 2,
-             navigationType: 'thumb',
-             navigationArrows: 'solo',
-             navigationStyle: 'round',
-             touchenabled: 'on',
-             onHoverStop: 'on',
-             swipe_velocity: 0.7,
-             swipe_min_touches: 1,
-             swipe_max_touches: 1,
-             drag_block_vertical: false,
-             spinner: 'spinner0',
-             keyboardNavigation: 'off',
-             navigationHAlign: 'center',
-             navigationVAlign: 'bottom',
-             navigationHOffset: 0,
-             navigationVOffset: 20,
-             soloArrowLeftHalign: 'left',
-             soloArrowLeftValign: 'center',
-             soloArrowLeftHOffset: 20,
-             soloArrowLeftVOffset: 0,
-             soloArrowRightHalign: 'right',
-             soloArrowRightValign: 'center',
-             soloArrowRightHOffset: 20,
-             soloArrowRightVOffset: 0,
-             shadow: 0,
-             fullWidth: 'on',
-             fullScreen: 'off',
-             stopLoop: 'off',
-             stopAfterLoops: -1,
-             stopAtSlide: -1,
-             shuffle: 'off',
-             autoHeight: 'off',
-             forceFullWidth: 'on',
-             fullScreenAlignForce: 'off',
-             minFullScreenHeight: 0,
-             hideNavDelayOnMobile: 1500,
-             hideThumbsOnMobile: 'off',
-             hideBulletsOnMobile: 'off',
-             hideArrowsOnMobile: 'off',
-             hideThumbsUnderResolution: 0,
-             hideSliderAtLimit: 0,
-             hideCaptionAtLimit: 0,
-             hideAllCaptionAtLilmit: 0,
-             startWithSlide: 0,
-             fullScreenOffsetContainer: ''
-           });
-         });
-      </script>
-      <!-- Data WOW -->
-      <script>
-         new WOW().init();
-      </script>
-
+      // store the slider in a local variable
+      var $window = $(window),
+          flexslider = { vars:{} };
+      // tiny helper function to add breakpoints
+      function getGridSize() {
+        return (window.innerWidth < 767) ? 1 :
+               (window.innerWidth < 993) ? 3 : 5;
+      }
+      $window.load(function() {
+        $('.flexslider').flexslider({
+          animation: "slide",
+          animationSpeed: 400,
+          animationLoop: true,
+          controlNav: false,
+          itemWidth: 310,
+          itemMargin: 30,
+          minItems: getGridSize(), // use function to pull in initial value
+          maxItems: getGridSize(), // use function to pull in initial value
+          start: function(slider){
+            $('body').removeClass('loading');
+            flexslider = slider;
+          }
+        });
+      });
+      // check grid size on resize event
+      $window.resize(function() {
+        var gridSize = getGridSize();
+        flexslider.vars.minItems = gridSize;
+        flexslider.vars.maxItems = gridSize;
+      });
+    }());
+	 
+  </script> 
+  <style>
+  .form-inline{margin-left:0px;}
+  </style>
    </body>
 </html>

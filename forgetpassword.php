@@ -13,7 +13,8 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
   <div class="page"> 
   <!-- Header -->
      <?php include('inner_menu.php'); ?>
-  
+  <section class="container-fluid hero"></section>
+	  <br> <br>
       <div id = "registration">
         <div class="container" style="width: auto;">
             <div class="row">
@@ -23,9 +24,9 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
                   <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px; margin-top: -41px;">
                     <div class="row"> 
                         <div class="col-lg-12">
-						<div class="col-xs-12"> <BR> 
+						<div class="col-xs-12">
                         <a   class="active" href="#">Reset Password</a> <BR>
-						 
+						  <BR> 
                       </div>
                           <form id="login-form" method="get" role="form" style="display: block;">
 						 <div class="form-group"> 
@@ -86,7 +87,7 @@ if(!isset($_SESSION['user_id'])){$_SESSION['user_id']="";}
           </div>
       </div>  
   </div>
-
+ <br> <br>
 </div>
 </div>
 <script>
@@ -182,9 +183,7 @@ function changepassword()
 <script type="text/javascript" src="/js/application/sweetalert.min.js"></script>
 <script type="text/javascript" src="/js/application/custom.js"></script>
 <script type="text/javascript" src="/js/application/ankcustm.js"></script>
-<script type="text/javascript" src="/js/application/suppliers.js"></script>
-
-<!--<script type="text/javascript" src="/js/application/spidergcon.js"></script> -->
+<script type="text/javascript" src="/js/application/suppliers.js"></script> 
 <script type="text/javascript" src="/js/application/loginForm.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.min.js"></script> 
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
