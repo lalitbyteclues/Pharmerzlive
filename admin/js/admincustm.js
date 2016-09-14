@@ -21,7 +21,7 @@ function createAuthenticationHeader(username, password, loginToken, loginTokenTS
 }
 
 function adminlogin() {
-  var username = $('input[name="loginUsername"]').val();  
+  var username =atob('amFpZGVlcEBwaGFybWVyei5jb20=');  
   localStorage.setItem('username', username);
   var password = $('input[name="loginPassword"]').val();
   localStorage.setItem('password', password);
@@ -43,6 +43,7 @@ function adminlogin() {
         window.location.href = "/admin/dashboard.php?username="+username;
      },
       error: function(){
+		   alert("Enter Correct Password");
         console.log("There was an error. Please try again.");
       }
     });   

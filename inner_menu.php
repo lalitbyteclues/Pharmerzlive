@@ -9,7 +9,7 @@
 						<li class="search">
 						<form  method="get" id="searchproduct" action="/products.php"> 
 							<input type="text" class="form-control" required class="form-control" name="namelike"  onkeypress="return IsAlphaNumeric(event);" placeholder="Enter for search">
-							<a href="javascript:void(0);" onclick="document.getElementById('searchproduct').submit();" class="hard-top"><img src="images/search.png"></a>
+							<a href="javascript:void(0);" onclick="document.getElementById('searchproduct').submit();" class="hard-top"><img src="/images/search.png"></a>
 							<input type="submit" style="display:none;" id="submitbtn"  />
 						</form>
 						</li> 

@@ -5,8 +5,8 @@
 					<h3>App</h3>
 					<ul class="nav">
 						<li><a href="#">Download app from</a></li>
-						<li><a href="https://play.google.com/store/apps/details?id=com.pharmerz.pharmerz&hl=en" target="_blank"><img class="img-responsive" src="images/app_store.png"></a>
-						<a href="https://itunes.apple.com/in/app/pharmerz/id1064115252" target="_blank"><img class="img-responsive" src="images/apple-store.png"></a>
+						<li><a href="https://play.google.com/store/apps/details?id=com.pharmerz.pharmerz&hl=en" target="_blank"><img class="img-responsive" src="/images/app_store.png"></a>
+						<a href="https://itunes.apple.com/in/app/pharmerz/id1064115252" target="_blank"><img class="img-responsive" src="/images/apple-store.png"></a>
 						</li>
 					 </ul>
 				</div>
@@ -30,10 +30,10 @@
 				<div class="col-sm-3">
 					<h3>Stay connected</h3>
 					<ul class="nav nav-pills social-links">
-						<li><a target="_blank" href="https://www.facebook.com/pharmerzz"><img class="img-responsive" src="images/fb.png"></a></li>
-						<li><a target="_blank" href="https://twitter.com/PharmerzT"><img class="img-responsive" src="images/twitter.png"></a></li>
-						<li><a target="_blank" href="https://www.linkedin.com/company/pharmerz"><img class="img-responsive" src="images/linked.png"></a></li>
-						<li><a target="_blank" href="https://www.youtube.com/channel/UC6C1uwIbZEziq8rfN-qW0-A"><img class="img-responsive" src="images/g+.png"></a></li>
+						<li><a target="_blank" href="https://www.facebook.com/pharmerzz"><img class="img-responsive" src="/images/fb.png"></a></li>
+						<li><a target="_blank" href="https://twitter.com/PharmerzT"><img class="img-responsive" src="/images/twitter.png"></a></li>
+						<li><a target="_blank" href="https://www.linkedin.com/company/pharmerz"><img class="img-responsive" src="/images/linked.png"></a></li>
+						<li><a target="_blank" href="https://www.youtube.com/channel/UC6C1uwIbZEziq8rfN-qW0-A"><img class="img-responsive" src="/images/g+.png"></a></li>
 					</ul>
 				</div>
 			</div>

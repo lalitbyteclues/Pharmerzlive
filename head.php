@@ -7,11 +7,11 @@
       <!-- Favicons Icon -->
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <!-- CSS Style -->
-	  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/flexslider.css">
+	  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/flexslider.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/helper.css">
-	<link rel="stylesheet" type="text/css" href="css/fonts.css">    
+	<link rel="stylesheet" type="text/css" href="/css/helper.css">
+	<link rel="stylesheet" type="text/css" href="/css/fonts.css">    
        <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
 window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=

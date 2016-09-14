@@ -93,10 +93,7 @@
                 <section class="login_content">
                     <form method="post">
                         <h1>Login</h1>
-                        <?php //if($status=='0'){ echo 'Credentials not matched.';} elseif($status=='1'){ echo 'Please fill all fields.';}?>
-                        <div>
-                            <input type="text" class="form-control" name="loginUsername" placeholder="Username" required="" />
-                        </div>
+                        <?php //if($status=='0'){ echo 'Credentials not matched.';} elseif($status=='1'){ echo 'Please fill all fields.';}?> 
                         <div>
                             <input type="password" class="form-control" name="loginPassword" placeholder="Password" required="" />
                         </div>
