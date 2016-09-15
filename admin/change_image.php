@@ -1,6 +1,10 @@
 <?php 
-include('../home/include/dbconnection.php'); 
-session_start();
+include('../home/include/dbconnection.php');  
+ session_start();
+if($_SESSION['admin_id'] == '')
+ {
+    header('Location:index.php');
+ } 
 $id = $_GET['id'];
 $sel_catedata= mysqli_query($conn,"SELECT * FROM `home_advert` WHERE `id`='$id'");
 $sel_data=mysqli_fetch_array($sel_catedata);

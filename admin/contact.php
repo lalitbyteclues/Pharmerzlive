@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include('../home/include/dbconnection.php'); 
- session_start(); ?>
-<head>
+include('../home/include/dbconnection.php');  
+    session_start();
+if($_SESSION['admin_id'] == '')
+ {
+    header('Location:index.php');
+ }
+
+?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">

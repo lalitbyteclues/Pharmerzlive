@@ -1,6 +1,10 @@
 <?php 
 include('../home/include/dbconnection.php'); 
  session_start();
+if($_SESSION['admin_id'] == '')
+ {
+    header('Location:index.php');
+ } 
 
     $status = $_GET['status'];
     $id = $_GET['id'];
