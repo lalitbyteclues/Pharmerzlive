@@ -242,14 +242,18 @@
                         <div class="locate wow fadeInUp text-center" data-wow-delay="0.5s" data-wow-duration="0.5s">
                            <p><strong>MUMBAI</strong></p>
                            <br />
-                           <p> C – 609, 6th Floor, Raga Building, Shell Colony Road, Chembur, Mumbai – 400071</p>
+                           <p> C/O Regus Group  <br />
+							Block A, Level 1 Shiv Sagar Estate,  <br />
+							Dr.Annie Besant Road  Worli, Mumbai 400 018, INDIA.</p>
                         </div>
                      </div>
                      <div class="col-md-6">
                         <div class="locate wow fadeInUp text-center" data-wow-delay="0.5s" data-wow-duration="0.5s">
                            <p><strong>PUNE</strong></p>
                            <br />
-                           <p>Office No. 7, Bldg A-8, Meera Nagar CHS Ltd., Lane 7, Koregaon Park, Pune – 6</p>
+                           <p>Office No 401, Business Avenue, Above Cosmos Bank, Lane No 6 , Koregaon Park,   <br />
+							Pune – 411001, Maharashtra , INDIA  <br />
+							P: +91-772-2074442 </p>
                         </div>
                      </div>
                      <!-- <p class="wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s"><strong>Mumbai</strong> – C – 609, 6th Floor, Raga Building, Shell Colony Road, Chembur, Mumbai – 400071 </p>
